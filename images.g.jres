@@ -4,6 +4,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "sprPoley"
     },
+    "image2": {
+        "data": "hwQQABAAAAAAAAEAAAAAAAAAEBEREQAAAAAREREREeEAEBERERER4QAREREREQAAABERERER3e0AERERERHd7QDQ3d0REQAAEBER0RERAADxERHRERER4RAREdERERHhAJFV1RERAAAQEVXVERHd7fGRVdUREd3tEBFeBQAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "myImage"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",
