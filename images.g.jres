@@ -29,6 +29,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "sprTristiniL0"
     },
+    "image7": {
+        "data": "hwQQABAAAAAAAAAAzP8AAAAAAMC2u88MAAAAvMtsGwwAAMC2a/zLDAAAwLtrZvsMAADAu2tm+wwAAMC7a/wbDAAAwLvLbMsMAMzMtrv7uwwAvMu8u79rDAC8a8z2u/YMALxmZsz/bwwAzGxmZmZmDAAAzGZmZsYAAADAzGZmzAAAAADAzMwAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "sprSeal"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",

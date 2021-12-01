@@ -117,6 +117,25 @@ e e f 6 6 6 6 6 6 f e
 . . . . . . . 8 8 . . . . . . . 
 . . . . . . . a a . . . . . . . 
 `;
+            case "image7":
+            case "sprSeal":return img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . c c c c c . . . 
+. . . . . . . . c b b b c . . . 
+. . . . . . . . c b b 6 c c . . 
+. . . c c c c c c c 6 6 6 c c . 
+. . c 6 b b b b 6 c c 6 6 6 c . 
+. c b b b b b b b b c 6 6 6 c c 
+c 6 b b b b b b b b 6 c 6 6 6 c 
+c b c 6 6 6 6 c b b f c 6 6 6 c 
+f b c c 6 6 c c b f b f 6 6 6 c 
+f b 6 f 6 6 f 6 f b b f 6 6 6 c 
+. f b b b b b b b b 6 f 6 6 c . 
+. c 1 c f f 1 c b 6 f 6 6 c c . 
+. c c c c c c c c c c c c . . . 
+. . . . . . . . . . . . . . . . 
+`;
         }
         return null;
     })
