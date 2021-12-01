@@ -9,7 +9,8 @@
         "arcade-story": "github:microsoft/arcade-storytelling#v1.0.3",
         "pxt-sight": "github:felixtsu/pxt-sight#v0.0.3",
         "color": "*",
-        "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2"
+        "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2",
+        "arcade-tilemap-a-star": "github:jwunderl/arcade-tilemap-a-star#v0.3.5"
     },
     "files": [
         "main.blocks",
