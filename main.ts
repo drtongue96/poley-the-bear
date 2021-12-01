@@ -1,5 +1,6 @@
 namespace SpriteKind {
     export const NPC = SpriteKind.create()
+    export const Object = SpriteKind.create()
 }
 // Scene 1: Cut scene with glacier
 // 
@@ -17,11 +18,15 @@ function setupLevel (lvl: number) {
     timer.background(function () {
         while (currentLevel == 1) {
             console.log("in loop")
-            for (let value of sprites.allOfKind(SpriteKind.NPC)) {
-                if (sprites.readDataString(value, "state") == "idle") {
+            for (let location of sprites.allOfKind(SpriteKind.NPC)) {
+                if (sprites.readDataString(location, "state") == "idle") {
                     if (Math.percentChance(50)) {
-                        sprites.setDataString(value, "state", "walking")
-                        scene.followPath(value, scene.aStar(tiles.locationOfSprite(value), tiles.getTilesByType(assets.tile`tGreen`)._pickRandom()), 50)
+                        sprites.setDataString(location, "state", "walking")
+                        scene.followPath(location, scene.aStar(tiles.locationOfSprite(location), tiles.getTilesByType(assets.tile`tGreen`)._pickRandom()), 30)
+                    }
+                } else {
+                    if (characterAnimations.matchesRule(location, characterAnimations.rule(Predicate.NotMoving))) {
+                        sprites.setDataString(location, "state", "idle")
                     }
                 }
                 pause(20)
@@ -42,6 +47,11 @@ function playSound (sound: string) {
         music.playTone(466, music.beat(BeatFraction.Eighth))
         music.playTone(622, music.beat(BeatFraction.Half))
     }
+}
+function placeObject (image2: Image, col: number, row: number) {
+    mySprite = sprites.create(image2, SpriteKind.Object)
+    mySprite.setFlag(SpriteFlag.Ghost, true)
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(col, row))
 }
 function playMusic (song: string) {
     if (song == "poleydies") {
@@ -171,6 +181,12 @@ function initializePlayer () {
     500,
     characterAnimations.rule(Predicate.NotMoving)
     )
+    hero.z = 10
+}
+function createGarbage (index: number) {
+    mySprite = sprites.create(garbageSprites[index], SpriteKind.Food)
+    sprites.setDataString(mySprite, "type", "garbage")
+    tiles.placeOnRandomTile(mySprite, assets.tile`tGreen`)
 }
 function startGame () {
     setupLevel(currentLevel)
@@ -201,6 +217,11 @@ function initializeGame () {
     assets.animation`animT3R`,
     assets.animation`animT4R`
     ]
+    garbageSprites = [assets.image`sprDeadFish`]
+}
+function placeStructure (image2: Image, col: number, row: number) {
+    placeObject(image2, col, row)
+    tiles.setWallAt(tiles.getTileLocation(col, row), true)
 }
 function doCutScene (scene2: number) {
     story.startCutscene(function () {
@@ -218,15 +239,46 @@ function saveGame () {
 	
 }
 function populateTown () {
-    for (let index = 0; index < 50; index++) {
+    for (let index = 0; index < 10; index++) {
         createNPC(randint(0, 3))
     }
+    for (let index = 0; index < 20; index++) {
+        createGarbage(0)
+    }
+    for (let location of tiles.getTilesByType(assets.tile`tHouse0`)) {
+        placeStructure(assets.image`sprRedHouseS`, tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
+        makeWalls(tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
+        mySprite.setFlag(SpriteFlag.GhostThroughSprites, true)
+    }
+    for (let location of tiles.getTilesByType(assets.tile`tHouse1`)) {
+        placeStructure(assets.image`sprBrownHouseS`, tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
+        makeWalls(tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
+        mySprite.setFlag(SpriteFlag.GhostThroughSprites, true)
+    }
 }
+function makeWalls (col: number, row: number) {
+    tiles.setWallAt(tiles.getTileLocation(col - 1, row - 1), true)
+    tiles.setWallAt(tiles.getTileLocation(col, row - 1), true)
+    tiles.setWallAt(tiles.getTileLocation(col + 1, row - 1), true)
+    tiles.setWallAt(tiles.getTileLocation(col - 1, row), true)
+    tiles.setWallAt(tiles.getTileLocation(col, row), true)
+    tiles.setWallAt(tiles.getTileLocation(col + 1, row), true)
+    tiles.setWallAt(tiles.getTileLocation(col - 1, row + 1), true)
+    tiles.setWallAt(tiles.getTileLocation(col, row + 1), true)
+    tiles.setWallAt(tiles.getTileLocation(col + 1, row + 1), true)
+}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
+    otherSprite.destroy(effects.hearts, 500)
+    playSound("garbage")
+    info.changeScoreBy(1)
+})
+let garbageSprites: Image[] = []
 let townieRightAnim: Image[][] = []
 let townieLeftAnim: Image[][] = []
 let townieUpAnim: Image[][] = []
 let townieDownAnim: Image[][] = []
 let myNPC: Sprite = null
+let mySprite: Sprite = null
 let currentLevel = 0
 let hero: Sprite = null
 let debugMode = false
@@ -234,22 +286,24 @@ initializeGame()
 initializePlayer()
 startGame()
 game.onUpdateInterval(500, function () {
-    for (let value of sprites.allOfKind(SpriteKind.NPC)) {
-        if (sight.isInSight(
-        value,
-        hero,
-        50,
-        false
-        )) {
-            value.sayText("i see you")
-            timer.after(500, function () {
-                hero.sayText("doh")
-            })
-        } else if (false) {
-        	
-        } else {
-            value.sayText("Nothing")
-            hero.sayText("")
+    if (currentLevel == 1) {
+        for (let location of sprites.allOfKind(SpriteKind.NPC)) {
+            if (sight.isInSight(
+            location,
+            hero,
+            50,
+            false
+            )) {
+                location.sayText("bear!")
+                timer.after(500, function () {
+                    hero.sayText("doh")
+                })
+            } else if (false) {
+            	
+            } else {
+                location.sayText("")
+                hero.sayText("")
+            }
         }
     }
 })

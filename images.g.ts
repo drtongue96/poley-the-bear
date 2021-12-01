@@ -198,22 +198,6 @@ ffffffffffffffffffffffffffddddd...
 ..................................
 ..................................
 `;
-            case "image11":
-            case "sprDeadFish":return img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-d . . . . d . d . . . d d d . . 
-. d d d d . d . d . d d . d d . 
-. d d d d . d . d . d d d d d . 
-. d d d d d d d d d d d d d . . 
-. d d d d . d . d . d d d d d . 
-d . . . . . d . d . . d d d . . 
-. . . . . d . d . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-`;
             case "image2":
             case "myImage":return img`
 . . . . . . . . . . . . . . . . 
@@ -270,6 +254,25 @@ d . . . . . d . d . . d d d . .
 . . . 1 1 1 1 1 1 1 . . . . . . 
 . . . 1 3 . . . 1 3 . . . . . . 
 . . . 1 1 1 . . 1 1 1 . . . . . 
+`;
+            case "image15":
+            case "sprTristiniB":return img`
+. . . . . . . f f f f . . . . . 
+. . . . f f f f f f f f . . . . 
+. . . f f f f f f f f f . . . . 
+. . . f f f f f f f f f f . . . 
+. . f f f f f f f f f f f f . . 
+. . f f f f f f f f f f f f . . 
+. . f f f f f f f f f f f f . . 
+. . f f f f f f f f f f f f . . 
+. . . f f f f f f f f f f . . . 
+. . . . f f f f f f f f . . . . 
+. . . . . f f f f f f . . . . . 
+. . . . . 6 c 6 6 c 6 . . . . . 
+. . . . . 4 6 6 6 6 4 . . . . . 
+. . . . . d 8 8 8 8 d . . . . . 
+. . . . . . 8 8 8 8 . . . . . . 
+. . . . . . a . . a . . . . . . 
 `;
             case "image13":
             case "sprRedHouseS":return img`
@@ -373,24 +376,21 @@ cc66666666664c66e4e44e44e44feeee66c46666666666cc
 .....64eee444c66f4e44e44e44e44ee66c444eee46.....
 ......6ccc666c66e4e44e44e44e44ee66c666ccc6......
 `;
-            case "image15":
-            case "sprTristiniB":return img`
-. . . . . . . f f f f . . . . . 
-. . . . f f f f f f f f . . . . 
-. . . f f f f f f f f f . . . . 
-. . . f f f f f f f f f f . . . 
-. . f f f f f f f f f f f f . . 
-. . f f f f f f f f f f f f . . 
-. . f f f f f f f f f f f f . . 
-. . f f f f f f f f f f f f . . 
-. . . f f f f f f f f f f . . . 
-. . . . f f f f f f f f . . . . 
-. . . . . f f f f f f . . . . . 
-. . . . . 6 c 6 6 c 6 . . . . . 
-. . . . . 4 6 6 6 6 4 . . . . . 
-. . . . . d 8 8 8 8 d . . . . . 
-. . . . . . 8 8 8 8 . . . . . . 
-. . . . . . a . . a . . . . . . 
+            case "image11":
+            case "sprDeadFish":return img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+d . . . . d . d . . . d d d . . 
+. d d d d . d . d . d d . d d . 
+. d d d d . d . d . d d d d d . 
+. d d d d d d d d d d d d d . . 
+. d d d d . d . d . d d d d d . 
+d . . . . . d . d . . d d d . . 
+. . . . . d . d . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
 `;
         }
         return null;
