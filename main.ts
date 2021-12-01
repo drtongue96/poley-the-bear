@@ -10,7 +10,7 @@ namespace SpriteKind {
 // Scene 4: Girl collects Garbage to create wind farms
 function setupLevel (lvl: number) {
     music.stopAllSounds()
-    tiles.loadMap(tiles.createMap(tilemap`level1`))
+    tiles.loadMap(tiles.createMap(tilemap`level6`))
     effects.blizzard.startScreenEffect()
     tiles.placeOnTile(hero, tiles.getTileLocation(7, 0))
     for (let value of tiles.getTilesByType(tiles.util.object1)) {
@@ -81,8 +81,14 @@ function playMusic (song: string) {
 }
 function initializePlayer () {
     hero = sprites.create(assets.image`myImage`, SpriteKind.Player)
-    controller.moveSprite(hero)
+    controller.moveSprite(hero, 50, 50)
     scene.cameraFollowSprite(hero)
+    characterAnimations.loopFrames(
+    hero,
+    assets.animation`animPoleyIdleR`,
+    500,
+    characterAnimations.rule(Predicate.NotMoving)
+    )
 }
 function startGame () {
     setupLevel(currentLevel)

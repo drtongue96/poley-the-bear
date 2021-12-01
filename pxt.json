@@ -7,7 +7,9 @@
         "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.1.0",
         "Timers": "github:microsoft/arcade-timers#v1.1.0",
         "arcade-story": "github:microsoft/arcade-storytelling#v1.0.3",
-        "pxt-sight": "github:felixtsu/pxt-sight#v0.0.3"
+        "pxt-sight": "github:felixtsu/pxt-sight#v0.0.3",
+        "color": "*",
+        "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2"
     },
     "files": [
         "main.blocks",
