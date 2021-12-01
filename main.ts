@@ -20,7 +20,18 @@ function setupLevel (lvl: number) {
     populateTown()
 }
 function playSound (sound: string) {
-	
+    if (sound == "garbage") {
+        music.setTempo(140)
+        music.playTone(247, music.beat(BeatFraction.Eighth))
+        music.playTone(220, music.beat(BeatFraction.Eighth))
+        music.playTone(165, music.beat(BeatFraction.Eighth))
+        music.playTone(330, music.beat(BeatFraction.Eighth))
+        music.playTone(294, music.beat(BeatFraction.Eighth))
+        music.playTone(494, music.beat(BeatFraction.Eighth))
+        music.playTone(659, music.beat(BeatFraction.Eighth))
+        music.playTone(466, music.beat(BeatFraction.Eighth))
+        music.playTone(622, music.beat(BeatFraction.Half))
+    }
 }
 function playMusic (song: string) {
     if (song == "poleydies") {
@@ -80,6 +91,65 @@ function playMusic (song: string) {
         })
     }
 }
+function createNPC (index: number) {
+    myNPC = sprites.create(townieDownAnim[index][0], SpriteKind.NPC)
+    characterAnimations.loopFrames(
+    myNPC,
+    townieUpAnim[index],
+    200,
+    characterAnimations.rule(Predicate.MovingUp)
+    )
+    characterAnimations.loopFrames(
+    myNPC,
+    townieDownAnim[index],
+    200,
+    characterAnimations.rule(Predicate.MovingDown)
+    )
+    characterAnimations.loopFrames(
+    myNPC,
+    townieLeftAnim[index],
+    200,
+    characterAnimations.rule(Predicate.MovingLeft)
+    )
+    characterAnimations.loopFrames(
+    myNPC,
+    townieRightAnim[index],
+    200,
+    characterAnimations.rule(Predicate.MovingLeft)
+    )
+    characterAnimations.loopFrames(
+    myNPC,
+    townieUpAnim[index],
+    200,
+    characterAnimations.rule(Predicate.MovingUp)
+    )
+    characterAnimations.runFrames(
+    myNPC,
+    [townieUpAnim[index][0]],
+    500,
+    characterAnimations.rule(Predicate.FacingUp)
+    )
+    characterAnimations.runFrames(
+    myNPC,
+    [townieDownAnim[index][0]],
+    500,
+    characterAnimations.rule(Predicate.FacingDown)
+    )
+    characterAnimations.runFrames(
+    myNPC,
+    [townieLeftAnim[index][0]],
+    500,
+    characterAnimations.rule(Predicate.FacingLeft)
+    )
+    characterAnimations.runFrames(
+    myNPC,
+    [townieLeftAnim[index][0]],
+    500,
+    characterAnimations.rule(Predicate.FacingRight)
+    )
+    characterAnimations.setCharacterAnimationsEnabled(myNPC, true)
+    tiles.placeOnRandomTile(myNPC, assets.tile`tGreen`)
+}
 function initializePlayer () {
     hero = sprites.create(assets.image`myImage`, SpriteKind.Player)
     controller.moveSprite(hero, 50, 50)
@@ -96,6 +166,10 @@ function startGame () {
 }
 function initializeGame () {
     currentLevel = 0
+    townieDownAnim = [assets.animation`animT1D`]
+    townieUpAnim = [assets.animation`animT1U`]
+    townieLeftAnim = [assets.animation`animT1L`]
+    townieRightAnim = [assets.animation`animT1R`]
 }
 function doCutScene (scene2: number) {
     story.startCutscene(function () {
@@ -113,9 +187,15 @@ function saveGame () {
 	
 }
 function populateTown () {
-	
+    for (let index = 0; index < 20; index++) {
+        createNPC(0)
+    }
 }
 let currentLevel = 0
+let townieRightAnim: Image[][] = []
+let townieLeftAnim: Image[][] = []
+let townieUpAnim: Image[][] = []
+let townieDownAnim: Image[][] = []
 let myNPC: Sprite = null
 let hero: Sprite = null
 let debugMode = false
