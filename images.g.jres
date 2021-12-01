@@ -14,6 +14,21 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "sprVillager1"
     },
+    "image4": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAAAAAA////AAAAAPD//90PAAAA//8e0f1g1AD//33f3aiGqP//3d3SZoYI/9/d3dRmhgj//33f3aiGqPD/HtH9YNQAAP//3Q8AAAAA8P//AAAAAAAA//8AAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "sprTristini"
+    },
+    "image5": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAPD//wAAAADw////DwAAAPD///8PAAAA//////8AAAD////d/28GAP///9/9iIao///e3d1o1Kj/3x3R3agGAPDffd/dAAAA8P/d3QIAAADw/w/QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "sprTristiniR"
+    },
+    "image6": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADw/w/QAAAAAPD/3d0CAAAA8N99390AAAD/3x3R3agGAP//3t3daNSo////3/2Ihqj////d/28GAP//////AAAA8P///w8AAADw////DwAAAADw//8AAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "sprTristiniL0"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",

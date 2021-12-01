@@ -62,7 +62,7 @@ game.onUpdateInterval(500, function () {
     myNPC,
     hero,
     40,
-    true
+    false
     )) {
         myNPC.sayText("i see you")
     } else {
