@@ -17,6 +17,7 @@ function setupLevel (lvl: number) {
         myNPC = sprites.create(assets.image`sprVillager1`, SpriteKind.NPC)
         tiles.placeOnTile(myNPC, value)
     }
+    populateTown()
 }
 function playSound (sound: string) {
 	
@@ -111,6 +112,9 @@ function doCutScene (scene2: number) {
 function saveGame () {
 	
 }
+function populateTown () {
+	
+}
 let currentLevel = 0
 let myNPC: Sprite = null
 let hero: Sprite = null
@@ -126,7 +130,13 @@ game.onUpdateInterval(500, function () {
     false
     )) {
         myNPC.sayText("i see you")
+        timer.after(500, function () {
+            hero.sayText("doh")
+        })
+    } else if (false) {
+    	
     } else {
         myNPC.sayText("Nothing")
+        hero.sayText("")
     }
 })
