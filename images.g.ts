@@ -411,6 +411,56 @@ cc7777777777776c
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `;
+            case "image18":
+            case "sprTinCan":return img`
+. . . . . . . . . . . . . 
+. . . . . . . . . f f . . 
+. . . . . . . f f f . . . 
+. . . f f f f f . . . . . 
+. . f f 2 4 f f . . . . . 
+. . d f f f f d . . . . . 
+. . d d d d d d . . . . . 
+. . 8 d d b d 8 . . . . . 
+. . d 8 8 8 8 d . . . . . 
+. . d d b d d d . . . . . 
+. . c d d b d c . . . . . 
+. . . c c c c . . . . . . 
+. . . . . . . . . . . . . 
+`;
+            case "image19":
+            case "sprDonut":return img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . e e e . . . 
+. . . . . . d e e e e e e e . . 
+. . . . d e e e e d d e e 6 d . 
+. . . e e 5 e d e e d d e d d . 
+. . e e d d d d e e e d d d d . 
+. e e e e d b b e e b e e e d . 
+. d d d e e e b b b e e e e d . 
+. d d e e e e b b e e a e e d . 
+. . d e 4 e e e e e e e e d . . 
+. . d e e e e e e d d d d . . . 
+. . . e e e d e e d d d . . . . 
+. . . . d d d d d d . . . . . . 
+. . . . . . . . . . . . . . . . 
+`;
+            case "image20":
+            case "sprDog":return img`
+. . . . e e e . . . . e e e 
+. . . . c d d c . . c d d c 
+. . . . c 1 d d f f d d 1 c 
+. . . . c 1 b d b d d b 1 c 
+. . . . f b 3 d d d d 3 b f 
+. . . . e d d d d d d d d e 
+b f b . e d f d c c d f d e 
+f d f . f d d f d d f d d f 
+f d f . f 2 d d b b d d b f 
+f d f f b b 2 1 c c 2 1 f . 
+f b d b b d d d f f d b f . 
+. f f f d d b d d d d d f . 
+. . . f d f f d f f f d f . 
+. . . f f . . f f . . f f . 
+`;
             case "image17":
             case "sprBlueBin":return img`
 .......................88.......................
@@ -461,56 +511,6 @@ fffffffffffffffccffff8ffff8ffff88ffffffffffff668
 ..............888888888888888888888.............
 ................88888888888888888...............
 ....................8888888888..................
-`;
-            case "image18":
-            case "sprTinCan":return img`
-. . . . . . . . . . . . . 
-. . . . . . . . . f f . . 
-. . . . . . . f f f . . . 
-. . . f f f f f . . . . . 
-. . f f 2 4 f f . . . . . 
-. . d f f f f d . . . . . 
-. . d d d d d d . . . . . 
-. . 8 d d b d 8 . . . . . 
-. . d 8 8 8 8 d . . . . . 
-. . d d b d d d . . . . . 
-. . c d d b d c . . . . . 
-. . . c c c c . . . . . . 
-. . . . . . . . . . . . . 
-`;
-            case "image19":
-            case "sprDonut":return img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . e e e . . . 
-. . . . . . d e e e e e e e . . 
-. . . . d e e e e d d e e 6 d . 
-. . . e e 5 e d e e d d e d d . 
-. . e e d d d d e e e d d d d . 
-. e e e e d b b e e b e e e d . 
-. d d d e e e b b b e e e e d . 
-. d d e e e e b b e e a e e d . 
-. . d e 4 e e e e e e e e d . . 
-. . d e e e e e e d d d d . . . 
-. . . e e e d e e d d d . . . . 
-. . . . d d d d d d . . . . . . 
-. . . . . . . . . . . . . . . . 
-`;
-            case "image20":
-            case "sprDog":return img`
-. . . . e e e . . . . e e e 
-. . . . c d d c . . c d d c 
-. . . . c 1 d d f f d d 1 c 
-. . . . c 1 b d b d d b 1 c 
-. . . . f b 3 d d d d 3 b f 
-. . . . e d d d d d d d d e 
-b f b . e d f d c c d f d e 
-f d f . f d d f d d f d d f 
-f d f . f 2 d d b b d d b f 
-f d f f b b 2 1 c c 2 1 f . 
-f b d b b d d d f f d b f . 
-. f f f d d b d d d d d f . 
-. . . f d f f d f f f d f . 
-. . . f f . . f f . . f f . 
 `;
         }
         return null;

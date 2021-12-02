@@ -391,6 +391,11 @@ function populateTown () {
         mySprite.y += -4
         mySprite.z = 20
     }
+    for (let location of tiles.getTilesByType(assets.tile`tBlueBin`)) {
+        placeStructure(assets.image`sprBlueBin`, tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
+        mySprite.y += -4
+        mySprite.z = 20
+    }
 }
 function makeWalls (col: number, row: number) {
     tiles.setWallAt(tiles.getTileLocation(col - 1, row), true)
