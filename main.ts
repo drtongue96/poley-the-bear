@@ -11,13 +11,13 @@ namespace SpriteKind {
 // Scene 4: Girl collects Garbage to create wind farms
 function setupLevel (lvl: number) {
     music.stopAllSounds()
+    scene.setBackgroundColor(7)
     tiles.loadMap(tiles.createMap(tilemap`level6`))
     effects.blizzard.startScreenEffect()
-    tiles.placeOnTile(hero, tiles.getTileLocation(7, 0))
+    tiles.placeOnTile(hero, tiles.getTileLocation(13, 0))
     populateTown()
     timer.background(function () {
         while (currentLevel == 1) {
-            console.log("in loop")
             for (let location of sprites.allOfKind(SpriteKind.NPC)) {
                 if (sprites.readDataString(location, "state") == "idle") {
                     if (Math.percentChance(50)) {
@@ -169,7 +169,7 @@ function createNPC (index: number) {
     )
     characterAnimations.setCharacterAnimationsEnabled(myNPC, true)
     sprites.setDataString(myNPC, "state", "idle")
-    tiles.placeOnRandomTile(myNPC, assets.tile`tGreen`)
+    tiles.placeOnRandomTile(myNPC, sprites.castle.tilePath4)
 }
 function initializePlayer () {
     hero = sprites.create(assets.image`myImage`, SpriteKind.Player)
@@ -245,14 +245,14 @@ function populateTown () {
     for (let index = 0; index < 20; index++) {
         createGarbage(0)
     }
-    for (let location of tiles.getTilesByType(assets.tile`tHouse0`)) {
-        placeStructure(assets.image`sprRedHouseS`, tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
-        makeWalls(tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
+    for (let location2 of tiles.getTilesByType(assets.tile`tHouse0`)) {
+        placeStructure(assets.image`sprRedHouseS`, tiles.locationXY(location2, tiles.XY.column), tiles.locationXY(location2, tiles.XY.row))
+        makeWalls(tiles.locationXY(location2, tiles.XY.column), tiles.locationXY(location2, tiles.XY.row))
         mySprite.setFlag(SpriteFlag.GhostThroughSprites, true)
     }
-    for (let location of tiles.getTilesByType(assets.tile`tHouse1`)) {
-        placeStructure(assets.image`sprBrownHouseS`, tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
-        makeWalls(tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
+    for (let location3 of tiles.getTilesByType(assets.tile`tHouse1`)) {
+        placeStructure(assets.image`sprBrownHouseS`, tiles.locationXY(location3, tiles.XY.column), tiles.locationXY(location3, tiles.XY.row))
+        makeWalls(tiles.locationXY(location3, tiles.XY.column), tiles.locationXY(location3, tiles.XY.row))
         mySprite.setFlag(SpriteFlag.GhostThroughSprites, true)
     }
 }
@@ -287,21 +287,21 @@ initializePlayer()
 startGame()
 game.onUpdateInterval(500, function () {
     if (currentLevel == 1) {
-        for (let location of sprites.allOfKind(SpriteKind.NPC)) {
+        for (let location4 of sprites.allOfKind(SpriteKind.NPC)) {
             if (sight.isInSight(
-            location,
+            location4,
             hero,
             50,
             false
             )) {
-                location.sayText("bear!")
+                location4.sayText("bear!")
                 timer.after(500, function () {
                     hero.sayText("doh")
                 })
             } else if (false) {
             	
             } else {
-                location.sayText("")
+                location4.sayText("")
                 hero.sayText("")
             }
         }
