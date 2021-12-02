@@ -12,6 +12,12 @@ namespace SpriteKind {
 function setupLevel (lvl: number) {
     music.stopAllSounds()
     scene.setBackgroundColor(7)
+    if (lvl == 0) {
+        hero.setFlag(SpriteFlag.Invisible, true)
+        story.printCharacterText("How about those jets?", "donuts")
+        story.printDialog("That is a nice donut", 80, 90, 50, 150)
+        story.showPlayerChoices("one", "two", "three")
+    }
     if (lvl == 1) {
         effects.blizzard.startScreenEffect()
         tiles.loadMap(tiles.createMap(tilemap`level6`))
@@ -253,13 +259,7 @@ function createNPC (index: number) {
     tiles.placeOnRandomTile(myNPC, sprites.castle.tilePath4)
 }
 function initializePlayer (lvl: number) {
-    if (lvl == 0) {
-        hero = sprites.create(assets.image`sprTristini`, SpriteKind.Player)
-        hero.setFlag(SpriteFlag.Invisible, true)
-        story.printCharacterText("How about those jets?", "donuts")
-        story.printDialog("That is a nice donut", 80, 90, 50, 150)
-        story.showPlayerChoices("one", "two", "three")
-    }
+    hero = sprites.create(assets.image`sprEmpty`, SpriteKind.Player)
     if (lvl == 1) {
         hero = sprites.create(assets.image`myImage`, SpriteKind.Player)
         hungerbar = statusbars.create(20, 4, StatusBarKind.Health)
@@ -373,11 +373,13 @@ function populateTown () {
         placeStructure(assets.image`sprRedHouseS`, tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
         makeWalls(tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
         mySprite.setFlag(SpriteFlag.GhostThroughSprites, true)
+        mySprite.z = 20
     }
     for (let location of tiles.getTilesByType(assets.tile`tHouse1`)) {
         placeStructure(assets.image`sprBrownHouseS`, tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
         makeWalls(tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
         mySprite.setFlag(SpriteFlag.GhostThroughSprites, true)
+        mySprite.z = 20
     }
     for (let location of tiles.getTilesByType(assets.tile`tTree0`)) {
         placeStructure(assets.image`sprTree`, tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
@@ -391,9 +393,6 @@ function populateTown () {
     }
 }
 function makeWalls (col: number, row: number) {
-    tiles.setWallAt(tiles.getTileLocation(col - 1, row - 1), true)
-    tiles.setWallAt(tiles.getTileLocation(col, row - 1), true)
-    tiles.setWallAt(tiles.getTileLocation(col + 1, row - 1), true)
     tiles.setWallAt(tiles.getTileLocation(col - 1, row), true)
     tiles.setWallAt(tiles.getTileLocation(col, row), true)
     tiles.setWallAt(tiles.getTileLocation(col + 1, row), true)
@@ -427,7 +426,7 @@ let currentLevel = 0
 changeColors(false)
 let debugMode = false
 initializeGame()
-currentLevel = 1
+currentLevel = 0
 initializePlayer(currentLevel)
 startGame()
 game.onUpdateInterval(5000, function () {

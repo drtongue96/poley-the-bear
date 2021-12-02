@@ -74,6 +74,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "sprTristini"
     },
+    "image16": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "sprEmpty"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",
