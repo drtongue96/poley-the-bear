@@ -13,10 +13,8 @@ function setupLevel (lvl: number) {
     music.stopAllSounds()
     scene.setBackgroundColor(7)
     if (lvl == 0) {
-        hero.setFlag(SpriteFlag.Invisible, true)
-        story.printCharacterText("How about those jets?", "donuts")
-        story.printDialog("That is a nice donut", 80, 90, 50, 150)
-        story.showPlayerChoices("one", "two", "three")
+        effects.blizzard.startScreenEffect()
+        tiles.loadMap(tiles.createMap(tilemap`tmCutscene1`))
     }
     if (lvl == 1) {
         effects.blizzard.startScreenEffect()
@@ -259,7 +257,9 @@ function createNPC (index: number) {
     tiles.placeOnRandomTile(myNPC, sprites.castle.tilePath4)
 }
 function initializePlayer (lvl: number) {
-    hero = sprites.create(assets.image`sprEmpty`, SpriteKind.Player)
+    if (lvl == 0) {
+        hero = sprites.create(assets.image`myImage`, SpriteKind.Player)
+    }
     if (lvl == 1) {
         hero = sprites.create(assets.image`myImage`, SpriteKind.Player)
         hungerbar = statusbars.create(20, 4, StatusBarKind.Health)
@@ -338,7 +338,7 @@ function initializeGame () {
     assets.animation`animT3R`,
     assets.animation`animT4R`
     ]
-    garbageSprites = [assets.image`sprDeadFish`]
+    garbageSprites = [assets.image`sprDeadFish`, assets.image`sprTinCan`, assets.image`sprDonut`]
 }
 function placeStructure (image2: Image, col: number, row: number) {
     placeObject(image2, col, row)
@@ -367,7 +367,7 @@ function populateTown () {
         createNPC(randint(0, 3))
     }
     for (let index = 0; index < 20; index++) {
-        createGarbage(0)
+        createGarbage(randint(0, 2))
     }
     for (let location of tiles.getTilesByType(assets.tile`tHouse0`)) {
         placeStructure(assets.image`sprRedHouseS`, tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
@@ -426,7 +426,7 @@ let currentLevel = 0
 changeColors(false)
 let debugMode = false
 initializeGame()
-currentLevel = 0
+currentLevel = 1
 initializePlayer(currentLevel)
 startGame()
 game.onUpdateInterval(5000, function () {

@@ -411,6 +411,107 @@ cc7777777777776c
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `;
+            case "image17":
+            case "sprBlueBin":return img`
+.......................88.......................
+....................f8ff8f8f....................
+.................888ffffff8f888.................
+..............888f88f8f8ffff88f888..............
+...........ffff88ffff8ffff8ffff88f88f...........
+........fffff8f88f88f8ff8f8f88f88f88ffff........
+.....888ffffffffff88f8ffff8f88ffff88f88f888.....
+...88ffffff8fffccf88fff8ffff88f88f88f88ffff88...
+.cc88ff8fffffffccf88f8ffff8f88f88fffffff8ff8866.
+8cfffffff8ff88fccf88f8ff8f8f88f88fccff8ffffffff8
+fffffffffffffffccffff8ffff8ffff88ffffffffffff668
+8ffffffffffffffffff8f8f8ff8f88f8ffffffffffff8888
+866fffffffffffff8fffffffffffffffffff8fffff668888
+8886f6ffff8ffff8ff8ff8ff8f8fffffffffffff66888888
+8888886ffffffffffffffffffffffff8fffffff688888888
+8888888868fffffffff8ffffffffffffffff868888888888
+888888888886cfffffffffffffffffffff66888888888888
+888888888888888fffffffff8fffffff8688888888888888
+88888888888888886fffffffffffff668888888888888888
+88888888888888888886ffffffff66888888888888888888
+8888888888888888888886ffff6688888888888888888888
+888888888888888888888886866888888888888888888888
+888888888888888888888888688888888888888888888888
+888888888888888888888888888888888888888888888888
+888888888888888888888888888888888888888888888888
+888888888888888888888888888888888888888888888888
+88888811188888888888888c8c8888888888881188888888
+88888111111888888888888c8c8888888888811111888888
+88888111111888888888888c888888888888111111888888
+88888111111888888888888c8c8888888881111111818888
+88888811111188888888888c8c8888888881111111811888
+8881181881118888888888888c8888888881111118811888
+88111888811888888888888c8c8888888881118818111888
+88111888888818888888888c8c8888888888888888111888
+88111188881111888888888c8c8888888881118888111888
+88111118888111888888888c888888888881118881111888
+88881118111111888888888c8c8888888811111188118888
+88881118111111888888888c8c888888881111111818888.
+88888818111111888888888c8c88888888111111188888..
+.888888881111188888888888c8888888811111188888...
+...88888888888888888888c8c888888888888888888....
+.....888888888888888888c8c8888888888888888......
+.......8888888888888888c8c88888888888888........
+.........88888888888888c88888888888888..........
+............888888888888888888888888............
+..............888888888888888888888.............
+................88888888888888888...............
+....................8888888888..................
+`;
+            case "image18":
+            case "sprTinCan":return img`
+. . . . . . . . . . . . . 
+. . . . . . . . . f f . . 
+. . . . . . . f f f . . . 
+. . . f f f f f . . . . . 
+. . f f 2 4 f f . . . . . 
+. . d f f f f d . . . . . 
+. . d d d d d d . . . . . 
+. . 8 d d b d 8 . . . . . 
+. . d 8 8 8 8 d . . . . . 
+. . d d b d d d . . . . . 
+. . c d d b d c . . . . . 
+. . . c c c c . . . . . . 
+. . . . . . . . . . . . . 
+`;
+            case "image19":
+            case "sprDonut":return img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . e e e . . . 
+. . . . . . d e e e e e e e . . 
+. . . . d e e e e d d e e 6 d . 
+. . . e e 5 e d e e d d e d d . 
+. . e e d d d d e e e d d d d . 
+. e e e e d b b e e b e e e d . 
+. d d d e e e b b b e e e e d . 
+. d d e e e e b b e e a e e d . 
+. . d e 4 e e e e e e e e d . . 
+. . d e e e e e e d d d d . . . 
+. . . e e e d e e d d d . . . . 
+. . . . d d d d d d . . . . . . 
+. . . . . . . . . . . . . . . . 
+`;
+            case "image20":
+            case "sprDog":return img`
+. . . . e e e . . . . e e e 
+. . . . c d d c . . c d d c 
+. . . . c 1 d d f f d d 1 c 
+. . . . c 1 b d b d d b 1 c 
+. . . . f b 3 d d d d 3 b f 
+. . . . e d d d d d d d d e 
+b f b . e d f d c c d f d e 
+f d f . f d d f d d f d d f 
+f d f . f 2 d d b b d d b f 
+f d f f b b 2 1 c c 2 1 f . 
+f b d b b d d d f f d b f . 
+. f f f d d b d d d d d f . 
+. . . f d f f d f f f d f . 
+. . . f f . . f f . . f f . 
+`;
         }
         return null;
     })
@@ -1565,6 +1666,100 @@ c b b b b e e d d d d c . .
 . . . 1 1 1 1 1 1 1 1 1 . . . . 
 . . . . 1 1 1 e 1 1 1 . . . . . 
 . . . . . . . . . 1 . . . . . . 
+`];
+            case "animDogRight":
+            case "anim2":return [img`
+. . . . e e e . . . . e e e 
+. . . . c d d c . . c d d c 
+. . . . c 1 d d f f d d 1 c 
+. . . . c 1 b d b d d b 1 c 
+. . . . f b 3 d d d d 3 b f 
+. . . . e d d d d d d d d e 
+b f b . e d f d c c d f d e 
+f d f . f d d f d d f d d f 
+f d f . f 2 d d b b d d b f 
+f d f f b b 2 1 c c 2 1 f . 
+f b d b b d d d f f d b f . 
+. f f f d d b d d d d d f . 
+. . . f d f f d f f f d f . 
+. . . f f . . f f . . f f . 
+`, img`
+. . . . . . . . . . . . . . 
+. . . . e e e . . . . e e e 
+. . . . c d d c . . c d d c 
+. . . . c 1 d d f f d d 1 c 
+. . . . c 1 b d b d d b 1 c 
+. . . . f b 3 d d d d 3 b f 
+. . . . e d d d d d d d d e 
+. b f b e d f d e e d f d e 
+. f d f f d d f d d f d d f 
+. f d f b 2 d d b b d d b f 
+. f b d b d 1 2 c c 2 1 f . 
+. . f f f d d d f f d d f . 
+. . . . f d f f f d b d f . 
+. . . . f f . . f f f f . . 
+`, img`
+. . . . . . . . . . . . . . 
+. . . . e e e . . . . e e e 
+. . . . c d d c . . c d d c 
+. . . . c 1 d d f f d d 1 c 
+. . . . c 1 b d b d d b 1 c 
+. . . . f b 3 d d d d 3 b f 
+. . . . e d d d d d d d d e 
+b f b . e d f d c c d f d e 
+f d f . f d d f d d f d d f 
+f d f f b 2 d d b b d d b f 
+f b d b b d 1 2 c c 2 1 f . 
+. f f f f d d d f f d d f . 
+. . . . . f d f d b d f . . 
+. . . . . f f f f f f . . . 
+`];
+            case "animDogLeft":
+            case "anim15":return [img`
+e e e . . . . e e e . . . . 
+c d d c . . c d d c . . . . 
+c 1 d d f f d d 1 c . . . . 
+c 1 b d d b d b 1 c . . . . 
+f b 3 d d d d 3 b f . . . . 
+e d d d d d d d d e . . . . 
+e d f d c c d f d e . b f b 
+f d d f d d f d d f . f d f 
+f b d d b b d d 2 f . f d f 
+. f 1 2 c c 1 2 b b f f d f 
+. f b d f f d d d b b d b f 
+. f d d d d d b d d f f f . 
+. f d f f f d f f d f . . . 
+. f f . . f f . . f f . . . 
+`, img`
+. . . . . . . . . . . . . . 
+e e e . . . . e e e . . . . 
+c d d c . . c d d c . . . . 
+c 1 d d f f d d 1 c . . . . 
+c 1 b d d b d b 1 c . . . . 
+f b 3 d d d d 3 b f . . . . 
+e d d d d d d d d e . . . . 
+e d f d e e d f d e b f b . 
+f d d f d d f d d f f d f . 
+f b d d b b d d 2 b f d f . 
+. f 1 2 c c 2 1 d b d b f . 
+. f d d f f d d d f f f . . 
+. f d b d f f f d f . . . . 
+. . f f f f . . f f . . . . 
+`, img`
+. . . . . . . . . . . . . . 
+e e e . . . . e e e . . . . 
+c d d c . . c d d c . . . . 
+c 1 d d f f d d 1 c . . . . 
+c 1 b d d b d b 1 c . . . . 
+f b 3 d d d d 3 b f . . . . 
+e d d d d d d d d e . . . . 
+e d f d c c d f d e . b f b 
+f d d f d d f d d f . f d f 
+f b d d b b d d 2 b f f d f 
+. f 1 2 c c 2 1 d b b d b f 
+. f d d f f d d d f f f f . 
+. . f d b d f d f . . . . . 
+. . . f f f f f f . . . . . 
 `];
         }
         return null;
