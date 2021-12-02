@@ -55,8 +55,8 @@ function placeObject (image2: Image, col: number, row: number) {
 }
 function playMusic (song: string) {
     if (song == "poleydies") {
+        music.setTempo(160)
         timer.background(function () {
-            music.setTempo(160)
             music.playTone(294, music.beat(BeatFraction.Whole))
             music.playTone(330, music.beat(BeatFraction.Whole))
             music.playTone(440, music.beat(BeatFraction.Whole))
@@ -72,8 +72,8 @@ function playMusic (song: string) {
         })
     }
     if (song == "something") {
+        music.setTempo(160)
         timer.background(function () {
-            music.setTempo(160)
             music.playTone(494, music.beat(BeatFraction.Whole))
             music.playTone(440, music.beat(BeatFraction.Whole))
             music.playTone(659, music.beat(BeatFraction.Whole))
@@ -108,6 +108,66 @@ function playMusic (song: string) {
             music.playTone(330, music.beat(BeatFraction.Whole))
             music.playTone(370, music.beat(BeatFraction.Whole))
             music.rest(music.beat(BeatFraction.Whole))
+        })
+    }
+    if (song == "endgame") {
+        music.setTempo(176)
+        timer.background(function () {
+            music.playTone(330, music.beat(BeatFraction.Whole))
+            music.playTone(440, music.beat(BeatFraction.Whole))
+            music.playTone(523, music.beat(BeatFraction.Whole))
+            music.playTone(587, music.beat(BeatFraction.Whole))
+            music.playTone(262, music.beat(BeatFraction.Half))
+            music.playTone(247, music.beat(BeatFraction.Half))
+            music.playTone(233, music.beat(BeatFraction.Half))
+            music.playTone(494, music.beat(BeatFraction.Half))
+            music.playTone(349, music.beat(BeatFraction.Whole))
+            music.rest(music.beat(BeatFraction.Whole))
+            music.playTone(220, music.beat(BeatFraction.Half))
+            music.playTone(196, music.beat(BeatFraction.Half))
+            music.playTone(220, music.beat(BeatFraction.Breve))
+        })
+        timer.background(function () {
+            music.playTone(220, music.beat(BeatFraction.Whole))
+            music.playTone(262, music.beat(BeatFraction.Whole))
+            music.playTone(208, music.beat(BeatFraction.Whole))
+            music.playTone(247, music.beat(BeatFraction.Whole))
+            music.rest(music.beat(BeatFraction.Breve))
+            music.playTone(165, music.beat(BeatFraction.Whole))
+        })
+    }
+    if (song == "windturbine") {
+        music.setTempo(200)
+        timer.background(function () {
+            music.playTone(175, music.beat(BeatFraction.Half))
+            music.playTone(262, music.beat(BeatFraction.Quarter))
+            music.playTone(220, music.beat(BeatFraction.Quarter))
+            music.playTone(330, music.beat(BeatFraction.Quarter))
+            music.playTone(262, music.beat(BeatFraction.Quarter))
+            music.playTone(392, music.beat(BeatFraction.Quarter))
+            music.playTone(330, music.beat(BeatFraction.Quarter))
+            music.playTone(494, music.beat(BeatFraction.Quarter))
+            music.playTone(392, music.beat(BeatFraction.Quarter))
+        })
+    }
+    if (song == "newlevel") {
+        music.setTempo(150)
+        timer.background(function () {
+            music.playTone(294, music.beat(BeatFraction.Whole))
+            music.playTone(220, music.beat(BeatFraction.Half))
+            music.playTone(330, music.beat(BeatFraction.Quarter))
+            music.playTone(247, music.beat(BeatFraction.Quarter))
+            music.playTone(294, music.beat(BeatFraction.Triplet))
+            music.playTone(330, music.beat(BeatFraction.Triplet))
+            music.playTone(659, music.beat(BeatFraction.Triplet))
+            music.playTone(440, music.beat(BeatFraction.Whole))
+            music.playTone(494, music.beat(BeatFraction.Double))
+        })
+        timer.background(function () {
+            music.rest(music.beat(BeatFraction.Double))
+            music.rest(music.beat(BeatFraction.Whole))
+            music.playTone(277, music.beat(BeatFraction.Whole))
+            music.playTone(311, music.beat(BeatFraction.Double))
         })
     }
 }
