@@ -12,8 +12,8 @@ namespace SpriteKind {
 function setupLevel (lvl: number) {
     music.stopAllSounds()
     scene.setBackgroundColor(7)
-    effects.blizzard.startScreenEffect()
     if (lvl == 1) {
+        effects.blizzard.startScreenEffect()
         tiles.loadMap(tiles.createMap(tilemap`level6`))
         tiles.placeOnTile(hero, tiles.getTileLocation(13, 0))
         populateTown()
@@ -40,7 +40,7 @@ function setupLevel (lvl: number) {
         tiles.placeOnTile(hero, tiles.getTileLocation(13, 0))
         populateTown()
         timer.background(function () {
-            while (currentLevel == 1) {
+            while (currentLevel == 2) {
                 for (let location of sprites.allOfKind(SpriteKind.NPC)) {
                     if (sprites.readDataString(location, "state") == "idle") {
                         if (Math.percentChance(50)) {
@@ -253,6 +253,13 @@ function createNPC (index: number) {
     tiles.placeOnRandomTile(myNPC, sprites.castle.tilePath4)
 }
 function initializePlayer (lvl: number) {
+    if (lvl == 0) {
+        hero = sprites.create(assets.image`sprTristini`, SpriteKind.Player)
+        hero.setFlag(SpriteFlag.Invisible, true)
+        story.printCharacterText("How about those jets?", "donuts")
+        story.printDialog("That is a nice donut", 80, 90, 50, 150)
+        story.showPlayerChoices("one", "two", "three")
+    }
     if (lvl == 1) {
         hero = sprites.create(assets.image`myImage`, SpriteKind.Player)
         hungerbar = statusbars.create(20, 4, StatusBarKind.Health)
@@ -290,7 +297,8 @@ function initializePlayer (lvl: number) {
         200,
         characterAnimations.rule(Predicate.MovingUp)
         )
-    } else {
+    }
+    if (currentLevel == 2) {
         hero = sprites.create(assets.image`sprTristini`, SpriteKind.Player)
     }
     controller.moveSprite(hero, 50, 50)
@@ -401,6 +409,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
         hungerbar.value += 10
     }
 })
+function changeColors (bool: boolean) {
+    if (bool) {
+        color.setColor(7, color.rgb(0, 255, 152))
+    }
+}
 let garbageSprites: Image[] = []
 let hungerbar: StatusBarSprite = null
 let townieRightAnim: Image[][] = []
@@ -411,6 +424,7 @@ let myNPC: Sprite = null
 let mySprite: Sprite = null
 let hero: Sprite = null
 let currentLevel = 0
+changeColors(false)
 let debugMode = false
 initializeGame()
 currentLevel = 1
