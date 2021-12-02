@@ -12,27 +12,54 @@ namespace SpriteKind {
 function setupLevel (lvl: number) {
     music.stopAllSounds()
     scene.setBackgroundColor(7)
-    tiles.loadMap(tiles.createMap(tilemap`level6`))
     effects.blizzard.startScreenEffect()
-    tiles.placeOnTile(hero, tiles.getTileLocation(13, 0))
-    populateTown()
-    timer.background(function () {
-        while (currentLevel == 1) {
-            for (let location of sprites.allOfKind(SpriteKind.NPC)) {
-                if (sprites.readDataString(location, "state") == "idle") {
-                    if (Math.percentChance(50)) {
-                        sprites.setDataString(location, "state", "walking")
-                        scene.followPath(location, scene.aStar(tiles.locationOfSprite(location), tiles.getTilesByType(assets.tile`tGreen`)._pickRandom()), 30)
+    if (lvl == 1) {
+        tiles.loadMap(tiles.createMap(tilemap`level6`))
+        tiles.placeOnTile(hero, tiles.getTileLocation(13, 0))
+        populateTown()
+        timer.background(function () {
+            while (currentLevel == 1) {
+                for (let location of sprites.allOfKind(SpriteKind.NPC)) {
+                    if (sprites.readDataString(location, "state") == "idle") {
+                        if (Math.percentChance(50)) {
+                            sprites.setDataString(location, "state", "walking")
+                            scene.followPath(location, scene.aStar(tiles.locationOfSprite(location), tiles.getTilesByType(assets.tile`tGreen`)._pickRandom()), 30)
+                        }
+                    } else {
+                        if (characterAnimations.matchesRule(location, characterAnimations.rule(Predicate.NotMoving))) {
+                            sprites.setDataString(location, "state", "idle")
+                        }
                     }
-                } else {
-                    if (characterAnimations.matchesRule(location, characterAnimations.rule(Predicate.NotMoving))) {
-                        sprites.setDataString(location, "state", "idle")
-                    }
+                    pause(20)
                 }
-                pause(20)
             }
-        }
-    })
+        })
+    }
+    if (lvl == 2) {
+        tiles.loadMap(tiles.createMap(tilemap`level6`))
+        tiles.placeOnTile(hero, tiles.getTileLocation(13, 0))
+        populateTown()
+        timer.background(function () {
+            while (currentLevel == 1) {
+                for (let location of sprites.allOfKind(SpriteKind.NPC)) {
+                    if (sprites.readDataString(location, "state") == "idle") {
+                        if (Math.percentChance(50)) {
+                            sprites.setDataString(location, "state", "walking")
+                            scene.followPath(location, scene.aStar(tiles.locationOfSprite(location), tiles.getTilesByType(assets.tile`tGreen`)._pickRandom()), 30)
+                        }
+                    } else {
+                        if (characterAnimations.matchesRule(location, characterAnimations.rule(Predicate.NotMoving))) {
+                            sprites.setDataString(location, "state", "idle")
+                        }
+                    }
+                    pause(20)
+                }
+            }
+        })
+    }
+}
+function cleanUp () {
+    tiles.destroySpritesOfKind(SpriteKind.NPC)
 }
 function playSound (sound: string) {
     if (sound == "garbage") {
@@ -225,45 +252,50 @@ function createNPC (index: number) {
     sprites.setDataString(myNPC, "state", "idle")
     tiles.placeOnRandomTile(myNPC, sprites.castle.tilePath4)
 }
-function initializePlayer () {
-    hero = sprites.create(assets.image`myImage`, SpriteKind.Player)
-    hungerbar = statusbars.create(20, 4, StatusBarKind.Health)
-    hungerbar.setColor(6, 2)
-    hungerbar.attachToSprite(hero)
-    hungerbar.value = 50
+function initializePlayer (lvl: number) {
+    if (lvl == 1) {
+        hero = sprites.create(assets.image`myImage`, SpriteKind.Player)
+        hungerbar = statusbars.create(20, 4, StatusBarKind.Health)
+        hungerbar.setColor(6, 2)
+        hungerbar.attachToSprite(hero)
+        hungerbar.value = 50
+        hungerbar.setLabel("Hunger")
+        characterAnimations.loopFrames(
+        hero,
+        assets.animation`animPoleyIdleR`,
+        500,
+        characterAnimations.rule(Predicate.NotMoving)
+        )
+        characterAnimations.loopFrames(
+        hero,
+        assets.animation`animPoleyR`,
+        200,
+        characterAnimations.rule(Predicate.MovingRight)
+        )
+        characterAnimations.loopFrames(
+        hero,
+        assets.animation`animPoleyL`,
+        200,
+        characterAnimations.rule(Predicate.MovingLeft)
+        )
+        characterAnimations.loopFrames(
+        hero,
+        assets.animation`animPoleyD`,
+        200,
+        characterAnimations.rule(Predicate.MovingDown)
+        )
+        characterAnimations.loopFrames(
+        hero,
+        assets.animation`animPoleyU`,
+        200,
+        characterAnimations.rule(Predicate.MovingUp)
+        )
+    } else {
+        hero = sprites.create(assets.image`sprTristini`, SpriteKind.Player)
+    }
     controller.moveSprite(hero, 50, 50)
-    scene.cameraFollowSprite(hero)
-    characterAnimations.loopFrames(
-    hero,
-    assets.animation`animPoleyIdleR`,
-    500,
-    characterAnimations.rule(Predicate.NotMoving)
-    )
-    characterAnimations.loopFrames(
-    hero,
-    assets.animation`animPoleyR`,
-    200,
-    characterAnimations.rule(Predicate.MovingRight)
-    )
-    characterAnimations.loopFrames(
-    hero,
-    assets.animation`animPoleyL`,
-    200,
-    characterAnimations.rule(Predicate.MovingLeft)
-    )
-    characterAnimations.loopFrames(
-    hero,
-    assets.animation`animPoleyD`,
-    200,
-    characterAnimations.rule(Predicate.MovingDown)
-    )
-    characterAnimations.loopFrames(
-    hero,
-    assets.animation`animPoleyU`,
-    200,
-    characterAnimations.rule(Predicate.MovingUp)
-    )
     hero.z = 10
+    scene.cameraFollowSprite(hero)
 }
 function createGarbage (index: number) {
     mySprite = sprites.create(garbageSprites[index], SpriteKind.Food)
@@ -274,7 +306,6 @@ function startGame () {
     setupLevel(currentLevel)
 }
 function initializeGame () {
-    currentLevel = 1
     townieDownAnim = [
     assets.animation`animT1D`,
     assets.animation`animT2D`,
@@ -366,7 +397,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
     otherSprite.destroy(effects.hearts, 500)
     playSound("garbage")
     info.changeScoreBy(1)
-    hungerbar.value += 10
+    if (currentLevel == 1) {
+        hungerbar.value += 10
+    }
 })
 let garbageSprites: Image[] = []
 let hungerbar: StatusBarSprite = null
@@ -376,11 +409,12 @@ let townieUpAnim: Image[][] = []
 let townieDownAnim: Image[][] = []
 let myNPC: Sprite = null
 let mySprite: Sprite = null
-let currentLevel = 0
 let hero: Sprite = null
+let currentLevel = 0
 let debugMode = false
 initializeGame()
-initializePlayer()
+currentLevel = 1
+initializePlayer(currentLevel)
 startGame()
 game.onUpdateInterval(5000, function () {
     if (currentLevel == 1) {

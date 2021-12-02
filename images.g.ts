@@ -22,25 +22,6 @@ e e f 6 6 6 6 6 6 f e
 . . . f f f f f f . . 
 . . . f f . . f f . . 
 `;
-            case "image4":
-            case "sprTristini":return img`
-. . . . . f f f f f . . . . . . 
-. . . . f f f f f f f . . . . . 
-. . . f f f f f f f f f . . . . 
-. . . f f f f f d f f f f . . . 
-. . f f f e d d d d e f f f . . 
-. . f f f 1 7 d d 7 1 f f f . . 
-. . f f d 1 f d d f 1 d f f . . 
-. . f f d d d d d d d d f f . . 
-. . . . f d d 2 4 d d f . . . . 
-. . . . . f d d d d f . . . . . 
-. . . . . . 8 6 6 8 . . . . . . 
-. . . . . 6 a 6 6 a 6 . . . . . 
-. . . . . 4 6 6 6 6 4 . . . . . 
-. . . . . d 8 8 8 8 d . . . . . 
-. . . . . . 8 8 8 8 . . . . . . 
-. . . . . . a . . a . . . . . . 
-`;
             case "image5":
             case "sprTristiniR":return img`
 . . . . . f f f f f . . . . . . 
@@ -391,6 +372,25 @@ cc7777777777776c
 . . . . 1 1 1 3 1 1 1 . . . . . 
 . . . . . 1 . . . 1 . . . . . . 
 . . . . . 3 . . . 3 . . . . . . 
+`;
+            case "image4":
+            case "sprTristini":return img`
+. . . . . f f f f f . . . . . . 
+. . . . f f f f f f f . . . . . 
+. . . f f f f f f f f f . . . . 
+. . . f f f f f d f f f f . . . 
+. . f f f e d d d d e f f f . . 
+. . f f f 1 7 d d 7 1 f f f . . 
+. . f f d 1 f d d f 1 d f f . . 
+. . f f d d d d d d d d f f . . 
+. . . . f d d 2 4 d d f . . . . 
+. . . . . f d d d d f . . . . . 
+. . . . . . 8 6 6 8 . . . . . . 
+. . . . . 6 a 6 6 a 6 . . . . . 
+. . . . . 4 6 6 6 6 4 . . . . . 
+. . . . . d 8 8 8 8 d . . . . . 
+. . . . . . 8 8 8 8 . . . . . . 
+. . . . . . a . . a . . . . . . 
 `;
         }
         return null;
