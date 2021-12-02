@@ -195,13 +195,7 @@ function createNPC (index: number) {
     myNPC,
     townieRightAnim[index],
     200,
-    characterAnimations.rule(Predicate.MovingLeft)
-    )
-    characterAnimations.loopFrames(
-    myNPC,
-    townieUpAnim[index],
-    200,
-    characterAnimations.rule(Predicate.MovingUp)
+    characterAnimations.rule(Predicate.MovingRight)
     )
     characterAnimations.runFrames(
     myNPC,
@@ -223,7 +217,7 @@ function createNPC (index: number) {
     )
     characterAnimations.runFrames(
     myNPC,
-    [townieLeftAnim[index][0]],
+    [townieRightAnim[index][0]],
     500,
     characterAnimations.rule(Predicate.FacingRight)
     )
@@ -233,6 +227,10 @@ function createNPC (index: number) {
 }
 function initializePlayer () {
     hero = sprites.create(assets.image`myImage`, SpriteKind.Player)
+    hungerbar = statusbars.create(20, 4, StatusBarKind.Health)
+    hungerbar.setColor(6, 2)
+    hungerbar.attachToSprite(hero)
+    hungerbar.value = 50
     controller.moveSprite(hero, 50, 50)
     scene.cameraFollowSprite(hero)
     characterAnimations.loopFrames(
@@ -240,6 +238,30 @@ function initializePlayer () {
     assets.animation`animPoleyIdleR`,
     500,
     characterAnimations.rule(Predicate.NotMoving)
+    )
+    characterAnimations.loopFrames(
+    hero,
+    assets.animation`animPoleyR`,
+    200,
+    characterAnimations.rule(Predicate.MovingRight)
+    )
+    characterAnimations.loopFrames(
+    hero,
+    assets.animation`animPoleyL`,
+    200,
+    characterAnimations.rule(Predicate.MovingLeft)
+    )
+    characterAnimations.loopFrames(
+    hero,
+    assets.animation`animPoleyD`,
+    200,
+    characterAnimations.rule(Predicate.MovingDown)
+    )
+    characterAnimations.loopFrames(
+    hero,
+    assets.animation`animPoleyU`,
+    200,
+    characterAnimations.rule(Predicate.MovingUp)
     )
     hero.z = 10
 }
@@ -283,11 +305,11 @@ function placeStructure (image2: Image, col: number, row: number) {
     placeObject(image2, col, row)
     tiles.setWallAt(tiles.getTileLocation(col, row), true)
 }
-function doCutScene (scene2: number) {
+function doCutScene (num: number) {
     story.startCutscene(function () {
         controller.moveSprite(hero, 0, 0)
         hero.setFlag(SpriteFlag.Invisible, true)
-        if (scene2 == 1) {
+        if (num == 1) {
             tiles.loadMap(tiles.createMap(tilemap`tmCutscene1`))
         }
     })
@@ -295,6 +317,9 @@ function doCutScene (scene2: number) {
         game.splash("Poley The Bear")
     })
 }
+statusbars.onZero(StatusBarKind.Health, function (status) {
+    game.over(false)
+})
 function saveGame () {
 	
 }
@@ -305,15 +330,25 @@ function populateTown () {
     for (let index = 0; index < 20; index++) {
         createGarbage(0)
     }
-    for (let location2 of tiles.getTilesByType(assets.tile`tHouse0`)) {
-        placeStructure(assets.image`sprRedHouseS`, tiles.locationXY(location2, tiles.XY.column), tiles.locationXY(location2, tiles.XY.row))
-        makeWalls(tiles.locationXY(location2, tiles.XY.column), tiles.locationXY(location2, tiles.XY.row))
+    for (let location of tiles.getTilesByType(assets.tile`tHouse0`)) {
+        placeStructure(assets.image`sprRedHouseS`, tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
+        makeWalls(tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
         mySprite.setFlag(SpriteFlag.GhostThroughSprites, true)
     }
-    for (let location3 of tiles.getTilesByType(assets.tile`tHouse1`)) {
-        placeStructure(assets.image`sprBrownHouseS`, tiles.locationXY(location3, tiles.XY.column), tiles.locationXY(location3, tiles.XY.row))
-        makeWalls(tiles.locationXY(location3, tiles.XY.column), tiles.locationXY(location3, tiles.XY.row))
+    for (let location of tiles.getTilesByType(assets.tile`tHouse1`)) {
+        placeStructure(assets.image`sprBrownHouseS`, tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
+        makeWalls(tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
         mySprite.setFlag(SpriteFlag.GhostThroughSprites, true)
+    }
+    for (let location of tiles.getTilesByType(assets.tile`tTree0`)) {
+        placeStructure(assets.image`sprTree`, tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
+        mySprite.y += -8
+        mySprite.z = 20
+    }
+    for (let location of tiles.getTilesByType(assets.tile`tTree1`)) {
+        placeStructure(assets.image`sprSmallPine`, tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
+        mySprite.y += -4
+        mySprite.z = 20
     }
 }
 function makeWalls (col: number, row: number) {
@@ -331,8 +366,10 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
     otherSprite.destroy(effects.hearts, 500)
     playSound("garbage")
     info.changeScoreBy(1)
+    hungerbar.value += 10
 })
 let garbageSprites: Image[] = []
+let hungerbar: StatusBarSprite = null
 let townieRightAnim: Image[][] = []
 let townieLeftAnim: Image[][] = []
 let townieUpAnim: Image[][] = []
@@ -345,6 +382,11 @@ let debugMode = false
 initializeGame()
 initializePlayer()
 startGame()
+game.onUpdateInterval(5000, function () {
+    if (currentLevel == 1) {
+        hungerbar.value += -5
+    }
+})
 game.onUpdateInterval(500, function () {
     if (currentLevel == 1) {
         for (let location4 of sprites.allOfKind(SpriteKind.NPC)) {
