@@ -11,7 +11,6 @@ namespace SpriteKind {
 // Scene 4: Girl collects Garbage to create wind farms
 function setupLevel (lvl: number) {
     music.stopAllSounds()
-    cleanUp()
     if (lvl == 0) {
         scene.setBackgroundColor(13)
         effects.blizzard.startScreenEffect()
@@ -70,6 +69,7 @@ function cleanUp () {
     tiles.destroySpritesOfKind(SpriteKind.Food)
     tiles.destroySpritesOfKind(SpriteKind.StatusBar)
     tiles.destroySpritesOfKind(SpriteKind.Object)
+    tiles.destroySpritesOfKind(SpriteKind.Player)
 }
 function playSound (sound: string) {
     if (sound == "garbage") {
@@ -359,6 +359,7 @@ function startGame () {
     setupLevel(currentLevel)
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`tFlag`, function (sprite, location) {
+    cleanUp()
     currentLevel += 1
     initializePlayer(currentLevel)
     setupLevel(currentLevel)
