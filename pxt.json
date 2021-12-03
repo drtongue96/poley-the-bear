@@ -12,7 +12,8 @@
         "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2",
         "arcade-tilemap-a-star": "github:jwunderl/arcade-tilemap-a-star#v0.3.5",
         "pxt-status-bar": "github:jwunderl/pxt-status-bar#v0.4.1",
-        "Color Fading": "github:jwunderl/pxt-color#v0.2.1"
+        "Color Fading": "github:jwunderl/pxt-color#v0.2.1",
+        "TilemapPath": "github:UnsignedArduino/TilemapPath#27ff80b905e9a311d3e36aecbf38fd1fd23af8ca"
     },
     "files": [
         "main.blocks",

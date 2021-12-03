@@ -276,6 +276,7 @@ function createNPC (index: number, col: number, row: number) {
     }
 }
 function initializePlayer (lvl: number) {
+    console.log("initializePlayer")
     if (lvl == 0) {
         hero = sprites.create(assets.image`myImage`, SpriteKind.Player)
         animateHero("poley")
@@ -333,6 +334,12 @@ function animateHero (character: string) {
         200,
         characterAnimations.rule(Predicate.MovingUp)
         )
+        characterAnimations.loopFrames(
+        hero,
+        assets.animation`animPoleyIdleL`,
+        200,
+        characterAnimations.rule(Predicate.FacingLeft, Predicate.NotMoving)
+        )
     }
     if (character == "tristini") {
         characterAnimations.loopFrames(
@@ -367,10 +374,14 @@ function animateHero (character: string) {
         )
     }
 }
-function createGarbage (index: number) {
+function createGarbage (index: number, col: number, row: number) {
     mySprite = sprites.create(garbageSprites[index], SpriteKind.Food)
     sprites.setDataString(mySprite, "type", "garbage")
-    tiles.placeOnRandomTile(mySprite, assets.tile`tGreen`)
+    if (col == 99) {
+        tiles.placeOnRandomTile(mySprite, assets.tile`tGreen`)
+    } else {
+        tiles.placeOnTile(mySprite, tiles.getTileLocation(col, row))
+    }
 }
 function startGame () {
     setupLevel(currentLevel)
@@ -382,6 +393,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`tFlag`, function (sprite, loc
     setupLevel(currentLevel)
 })
 function initializeGame () {
+    console.log("initializeGame")
     townieDownAnim = [
     assets.animation`animT1D`,
     assets.animation`animT2D`,
@@ -430,12 +442,15 @@ statusbars.onZero(StatusBarKind.Health, function (status) {
 function saveGame () {
 	
 }
+TilemapPath.on_sprite_finishes_path(function (sprite) {
+	
+})
 function populateTown () {
     for (let index = 0; index < 10; index++) {
         createNPC(randint(0, 3), 99, 99)
     }
     for (let index = 0; index < 20; index++) {
-        createGarbage(randint(0, 2))
+        createGarbage(randint(0, 2), 99, 99)
     }
     for (let location of tiles.getTilesByType(assets.tile`tHouse0`)) {
         placeStructure(assets.image`sprRedHouseS`, tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
@@ -483,12 +498,14 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
 })
 function populateMaze () {
     createNPC(0, 4, 0)
+    path = TilemapPath.create_path([tiles.getTileLocation(4, 0), tiles.getTileLocation(4, 9), tiles.getTileLocation(4, 0)])
 }
 function changeColors (bool: boolean) {
     if (bool) {
         color.setColor(7, color.rgb(0, 255, 152))
     }
 }
+let path: TilemapPath.TilemapPath = null
 let garbageSprites: Image[] = []
 let hungerbar: StatusBarSprite = null
 let townieRightAnim: Image[][] = []
@@ -510,24 +527,45 @@ game.onUpdateInterval(5000, function () {
         hungerbar.value += -5
     }
 })
+forever(function () {
+    if (currentLevel == 3) {
+        TilemapPath.follow_path(myNPC, path, 20)
+    }
+})
 game.onUpdateInterval(500, function () {
-    console.logValue("currentLevel = ", currentLevel)
     if (currentLevel == 1) {
-        for (let location4 of sprites.allOfKind(SpriteKind.NPC)) {
+        for (let location of sprites.allOfKind(SpriteKind.NPC)) {
             if (sight.isInSight(
-            location4,
+            location,
             hero,
             50,
             false
             )) {
-                location4.sayText("bear!")
+                location.sayText("bear!")
                 timer.after(500, function () {
                     hero.sayText("doh")
                 })
-            } else if (false) {
-            	
             } else {
-                location4.sayText("")
+                location.sayText("")
+                hero.sayText("")
+            }
+        }
+    }
+    if (currentLevel == 3) {
+        console.logValue("in loop", currentLevel)
+        for (let location of sprites.allOfKind(SpriteKind.NPC)) {
+            if (sight.isInSight(
+            location,
+            hero,
+            16,
+            false
+            )) {
+                location.sayText("bear!")
+                timer.after(500, function () {
+                    hero.sayText("doh")
+                })
+            } else {
+                location.sayText("")
                 hero.sayText("")
             }
         }
