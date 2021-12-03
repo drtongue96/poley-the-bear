@@ -19,8 +19,8 @@ function setupLevel (lvl: number) {
     if (lvl == 1) {
         scene.setBackgroundColor(7)
         effects.blizzard.startScreenEffect()
-        tiles.loadMap(tiles.createMap(tilemap`tmTown`))
-        tiles.placeOnTile(hero, tiles.getTileLocation(13, 0))
+        tiles.loadMap(tiles.createMap(tilemap`level4`))
+        tiles.placeOnTile(hero, tiles.getTileLocation(4, 1))
         populateTown()
         timer.background(function () {
             while (currentLevel == 1) {
@@ -65,7 +65,7 @@ function setupLevel (lvl: number) {
     }
     if (lvl == 3) {
         scene.setBackgroundColor(7)
-        tiles.loadMap(tiles.createMap(tilemap`tmTown3`))
+        tiles.loadMap(tiles.createMap(tilemap`level4`))
         populateMaze()
         tiles.placeOnTile(hero, tiles.getTileLocation(4, 0))
         timer.background(function () {
@@ -519,7 +519,7 @@ let currentLevel = 0
 changeColors(false)
 let debugMode = false
 initializeGame()
-currentLevel = 3
+currentLevel = 1
 initializePlayer(currentLevel)
 startGame()
 game.onUpdateInterval(5000, function () {
