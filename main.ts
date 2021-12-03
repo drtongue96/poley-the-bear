@@ -11,12 +11,14 @@ namespace SpriteKind {
 // Scene 4: Girl collects Garbage to create wind farms
 function setupLevel (lvl: number) {
     music.stopAllSounds()
-    scene.setBackgroundColor(7)
+    cleanUp()
     if (lvl == 0) {
+        scene.setBackgroundColor(13)
         effects.blizzard.startScreenEffect()
         tiles.loadMap(tiles.createMap(tilemap`tmCutscene1`))
     }
     if (lvl == 1) {
+        scene.setBackgroundColor(7)
         effects.blizzard.startScreenEffect()
         tiles.loadMap(tiles.createMap(tilemap`level6`))
         tiles.placeOnTile(hero, tiles.getTileLocation(13, 0))
@@ -40,6 +42,7 @@ function setupLevel (lvl: number) {
         })
     }
     if (lvl == 2) {
+        scene.setBackgroundColor(7)
         tiles.loadMap(tiles.createMap(tilemap`level6`))
         tiles.placeOnTile(hero, tiles.getTileLocation(13, 0))
         populateTown()
@@ -64,6 +67,9 @@ function setupLevel (lvl: number) {
 }
 function cleanUp () {
     tiles.destroySpritesOfKind(SpriteKind.NPC)
+    tiles.destroySpritesOfKind(SpriteKind.Food)
+    tiles.destroySpritesOfKind(SpriteKind.StatusBar)
+    tiles.destroySpritesOfKind(SpriteKind.Object)
 }
 function playSound (sound: string) {
     if (sound == "garbage") {
@@ -259,6 +265,7 @@ function createNPC (index: number) {
 function initializePlayer (lvl: number) {
     if (lvl == 0) {
         hero = sprites.create(assets.image`myImage`, SpriteKind.Player)
+        animateHero("poley")
     }
     if (lvl == 1) {
         hero = sprites.create(assets.image`myImage`, SpriteKind.Player)
@@ -267,6 +274,18 @@ function initializePlayer (lvl: number) {
         hungerbar.attachToSprite(hero)
         hungerbar.value = 50
         hungerbar.setLabel("Hunger")
+        animateHero("poley")
+    }
+    if (currentLevel == 2) {
+        hero = sprites.create(assets.image`sprTristini`, SpriteKind.Player)
+        animateHero("tristini")
+    }
+    controller.moveSprite(hero, 50, 50)
+    hero.z = 10
+    scene.cameraFollowSprite(hero)
+}
+function animateHero (character: string) {
+    if (character == "poley") {
         characterAnimations.loopFrames(
         hero,
         assets.animation`animPoleyIdleR`,
@@ -298,12 +317,38 @@ function initializePlayer (lvl: number) {
         characterAnimations.rule(Predicate.MovingUp)
         )
     }
-    if (currentLevel == 2) {
-        hero = sprites.create(assets.image`sprTristini`, SpriteKind.Player)
+    if (character == "tristini") {
+        characterAnimations.loopFrames(
+        hero,
+        assets.animation`animTristiniIdle`,
+        500,
+        characterAnimations.rule(Predicate.NotMoving)
+        )
+        characterAnimations.loopFrames(
+        hero,
+        assets.animation`animTristiniRight`,
+        200,
+        characterAnimations.rule(Predicate.MovingRight)
+        )
+        characterAnimations.loopFrames(
+        hero,
+        assets.animation`animTristiniL`,
+        200,
+        characterAnimations.rule(Predicate.MovingLeft)
+        )
+        characterAnimations.loopFrames(
+        hero,
+        assets.animation`animTristiniD`,
+        200,
+        characterAnimations.rule(Predicate.MovingDown)
+        )
+        characterAnimations.loopFrames(
+        hero,
+        assets.animation`animTristiniUp`,
+        200,
+        characterAnimations.rule(Predicate.MovingUp)
+        )
     }
-    controller.moveSprite(hero, 50, 50)
-    hero.z = 10
-    scene.cameraFollowSprite(hero)
 }
 function createGarbage (index: number) {
     mySprite = sprites.create(garbageSprites[index], SpriteKind.Food)
@@ -313,6 +358,11 @@ function createGarbage (index: number) {
 function startGame () {
     setupLevel(currentLevel)
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`tFlag`, function (sprite, location) {
+    currentLevel += 1
+    initializePlayer(currentLevel)
+    setupLevel(currentLevel)
+})
 function initializeGame () {
     townieDownAnim = [
     assets.animation`animT1D`,
@@ -431,7 +481,7 @@ let currentLevel = 0
 changeColors(false)
 let debugMode = false
 initializeGame()
-currentLevel = 1
+currentLevel = 0
 initializePlayer(currentLevel)
 startGame()
 game.onUpdateInterval(5000, function () {
@@ -440,6 +490,7 @@ game.onUpdateInterval(5000, function () {
     }
 })
 game.onUpdateInterval(500, function () {
+    console.logValue("currentLevel = ", currentLevel)
     if (currentLevel == 1) {
         for (let location4 of sprites.allOfKind(SpriteKind.NPC)) {
             if (sight.isInSight(
