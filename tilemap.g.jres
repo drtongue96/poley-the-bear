@@ -224,7 +224,7 @@
             "myTiles.tile24",
             "myTiles.tile26"
         ],
-        "displayName": "level6"
+        "displayName": "tmTown"
     },
     "*": {
         "mimeType": "image/x-mkcd-f4",

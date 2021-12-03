@@ -19,7 +19,7 @@ function setupLevel (lvl: number) {
     if (lvl == 1) {
         scene.setBackgroundColor(7)
         effects.blizzard.startScreenEffect()
-        tiles.loadMap(tiles.createMap(tilemap`level6`))
+        tiles.loadMap(tiles.createMap(tilemap`tmTown`))
         tiles.placeOnTile(hero, tiles.getTileLocation(13, 0))
         populateTown()
         timer.background(function () {
@@ -42,7 +42,7 @@ function setupLevel (lvl: number) {
     }
     if (lvl == 2) {
         scene.setBackgroundColor(7)
-        tiles.loadMap(tiles.createMap(tilemap`level6`))
+        tiles.loadMap(tiles.createMap(tilemap`tmTown`))
         tiles.placeOnTile(hero, tiles.getTileLocation(13, 0))
         populateTown()
         timer.background(function () {
