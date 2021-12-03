@@ -63,6 +63,15 @@ function setupLevel (lvl: number) {
             }
         })
     }
+    if (lvl == 3) {
+        scene.setBackgroundColor(7)
+        tiles.loadMap(tiles.createMap(tilemap`tmTown2`))
+        tiles.placeOnTile(hero, tiles.getTileLocation(0, 2))
+        populateMaze()
+        timer.background(function () {
+        	
+        })
+    }
 }
 function cleanUp () {
     tiles.destroySpritesOfKind(SpriteKind.NPC)
@@ -208,7 +217,7 @@ function playMusic (song: string) {
         })
     }
 }
-function createNPC (index: number) {
+function createNPC (index: number, col: number, row: number) {
     myNPC = sprites.create(townieDownAnim[index][0], SpriteKind.NPC)
     characterAnimations.loopFrames(
     myNPC,
@@ -260,7 +269,11 @@ function createNPC (index: number) {
     )
     characterAnimations.setCharacterAnimationsEnabled(myNPC, true)
     sprites.setDataString(myNPC, "state", "idle")
-    tiles.placeOnRandomTile(myNPC, sprites.castle.tilePath4)
+    if (col == 99) {
+        tiles.placeOnRandomTile(myNPC, sprites.castle.tilePath4)
+    } else {
+        tiles.placeOnTile(myNPC, tiles.getTileLocation(col, row))
+    }
 }
 function initializePlayer (lvl: number) {
     if (lvl == 0) {
@@ -279,6 +292,10 @@ function initializePlayer (lvl: number) {
     if (currentLevel == 2) {
         hero = sprites.create(assets.image`sprTristini`, SpriteKind.Player)
         animateHero("tristini")
+    }
+    if (lvl == 3) {
+        hero = sprites.create(assets.image`myImage`, SpriteKind.Player)
+        animateHero("poley")
     }
     controller.moveSprite(hero, 50, 50)
     hero.z = 10
@@ -415,7 +432,7 @@ function saveGame () {
 }
 function populateTown () {
     for (let index = 0; index < 10; index++) {
-        createNPC(randint(0, 3))
+        createNPC(randint(0, 3), 99, 99)
     }
     for (let index = 0; index < 20; index++) {
         createGarbage(randint(0, 2))
@@ -464,6 +481,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
         hungerbar.value += 10
     }
 })
+function populateMaze () {
+    createNPC(0, 4, 0)
+}
 function changeColors (bool: boolean) {
     if (bool) {
         color.setColor(7, color.rgb(0, 255, 152))
@@ -482,7 +502,7 @@ let currentLevel = 0
 changeColors(false)
 let debugMode = false
 initializeGame()
-currentLevel = 0
+currentLevel = 3
 initializePlayer(currentLevel)
 startGame()
 game.onUpdateInterval(5000, function () {
