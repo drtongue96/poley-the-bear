@@ -65,9 +65,9 @@ function setupLevel (lvl: number) {
     }
     if (lvl == 3) {
         scene.setBackgroundColor(7)
-        tiles.loadMap(tiles.createMap(tilemap`tmTown2`))
-        tiles.placeOnTile(hero, tiles.getTileLocation(0, 2))
+        tiles.loadMap(tiles.createMap(tilemap`tmTown3`))
         populateMaze()
+        tiles.placeOnTile(hero, tiles.getTileLocation(4, 0))
         timer.background(function () {
         	
         })
