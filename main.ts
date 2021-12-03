@@ -557,10 +557,11 @@ game.onUpdateInterval(500, function () {
             if (sight.isInSight(
             location,
             hero,
-            16,
+            32,
             false
             )) {
                 location.sayText("bear!")
+                scene.cameraShake(4, 500)
                 timer.after(500, function () {
                     hero.sayText("doh")
                 })
