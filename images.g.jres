@@ -104,6 +104,26 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "sprFlag"
     },
+    "image22": {
+        "data": "hwQwADAAAAAAAADQ293b3dvd293b3by7u7u7y8wAAAAAAADAvMu8y7zLvMu8y9y7u7u7u8sMAAAAAADAu8u7y7vLu8u7y9y8u7u7u7vLAAAAAACqqKqKqqqoqoqqytzLi4iIiLi7DAAAAACqqKqKqqqoqoqqutzNrTgzM7PdvQAAAKCIiIiIiIiIiIiIvNzNrTjP87y92wsAAKCoqoqqqqiqiqqqvNzNrTjP87y9270AAKCoqoqqqqiqiqqqu9zNrTgzM7O928sAAIiIiIiIiIiIiIjIy9vNrTjP87zd3csAAKiqiqqqqKqKqqrIy9vNrTjP87y928sAAKiqiqqqqKqKqqq4y9vNrTgzM7O9270AgIiIiIiIiIiIiIi8vNvNjYiIiLi9270AoKqKqqqoqoqqqoq83NvN3d3d3d3d3b0AoKqKqqqoqoqqqoq73LvMzMzMzMzMzMwAioiIiIiIiIiIiMi728vbEbG7u7u7u7sAqoqqqqiqqqiqqsjLvdwdsbu7u7u7u7sAqoqqqqiqqqiqqrjLzdux6/7/7+7+/++giIiIiIiIiIiIiLy7zd2xPjMzMzMzMzOgiqqqiqqqiqqqirzcvd2xvrvrvru7u7ugiqqqiqqqiqqqirvcvd2xPjP/PjMzMzOIiIiIiIiIiIiIyLvbvd2xPuP/PjMzMzOKqqqoqoqqqqiqyMvdvd2xvvv/vru7u7uIiIiIiIiIiIiIuMvdvd2xPvP/PjMzMzOqqqqqqqqqqqqqusvdvd2xPvP/PjMzMzOqqqqqqqqqqqqqusvdvd2xvvv/vru7u7uIiIiIiIiIiIiIuMvdvd2xPvP/PjMzMzOqqKqoqoqqqqiqyMvdvd2xPvP/PjMzMzOIiIiIiIiIiIiIyLvbvd2xvuv/vvv/u7ugiqqqiqqqiqqqirvcvd2xPjP/PuM/PzOgiqqqiqqqiqqqirzcvd2xPjPjPuM/PzOgiIiIiIiIiIiIiLy7zd2xvru7u+v/vrsAqoqqqqiqqqiqqrjLzdux6+7u7u7u7u4AqoqqqqiqqqiqqsjLvdwdsbu7u7u7u7sAioiIiIiIiIiIiMi728vbEbG7u7u7u7sAoKqKqqqoqoqqqoq73LvMzMzMzMzMzMwAoKqKqqqoqoqqqoq83NvN3d3d3d3d3b0AgIiIiIiIiIiIiIi8vNvNjYiIiLi9270AAKiqiqqqqKqKqqq4y9vNrTgzM7O9270AAKiqiqqqqKqKqqrIy9vNrTjP87y928sAAIiIiIiIiIiIiIjIy9vNrTjP87zd3csAAKCoqoqqqqiqiqqqu9zNrTgzM7O928sAAKCoqoqqqqiqiqqqvNzNrTjP87y9270AAKCIiIiIiIiIiIiIvNzNrTjP87y92wsAAACqqKqKqqqoqoqqutzNrTgzM7PdvQAAAACqqKqKqqqoqoqqytzLi4iIiLi7DAAAAADAu8u7y7vLu8u7y9y8u7u7u7vLAAAAAADAvMu8y7zLvMu8y9y7u7u7u8sMAAAAAADQ293b3dvd293b3by7u7u7y8wAAAA=",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "sprPurpleHouseS"
+    },
+    "image23": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAFUAAAAAAAAAUF0AAAAAAAAAVQAAAAAAAADVAAAAAAAAUF0AAAAAAADVVb0NAABQVVVdW1UAAF9VVbVVBQAAAAAAVQUAAAAAAABQBQAAAAAAAFAFAAAAAAAAVQ0AAAAAAABdAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "sprGarbageBanana"
+    },
+    "image25": {
+        "data": "hwQQABAAAAAAAAC7q6oAAAAAuzMzow4AALAzMzMy6gAA2z1jMzPqDrDdMzMzM7oOsD03szPTug7bPTOqM9NKDtszozoz00oO2zSjMzOtRA47MztTM61EDjozMzPTSrQOOjM5M61E5ACgMzPdSkTuAKA6M6pE5A4AAKqqRETuAAAAALu77gAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "sprGarbageDonut"
+    },
+    "image24": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAO7u7gIAAAAA///uLgAAAPD//2/uAgAA/v/sLuICAOAiIiIiIizg7i4iIiIiLMDMLCIiIiLEfGcsIiIiIuR37iIiIsIi5ODiRCLO/ELiACJVJP//Tw4ALlQk9i8kDgAuIvL/ROIAAOAuIiLiDgAAAODu7g4AAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "sprGarbageApple"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",

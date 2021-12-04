@@ -218,6 +218,7 @@ function playMusic (song: string) {
     }
 }
 function createNPC (index: number, col: number, row: number) {
+    console.log("createNPC")
     myNPC = sprites.create(townieDownAnim[index][0], SpriteKind.NPC)
     characterAnimations.loopFrames(
     myNPC,
@@ -375,10 +376,11 @@ function animateHero (character: string) {
     }
 }
 function createGarbage (index: number, col: number, row: number) {
+    console.log("createGarbage")
     mySprite = sprites.create(garbageSprites[index], SpriteKind.Food)
     sprites.setDataString(mySprite, "type", "garbage")
     if (col == 99) {
-        tiles.placeOnRandomTile(mySprite, assets.tile`tGreen`)
+        tiles.placeOnRandomTile(mySprite, sprites.castle.tilePath6)
     } else {
         tiles.placeOnTile(mySprite, tiles.getTileLocation(col, row))
     }
@@ -418,7 +420,13 @@ function initializeGame () {
     assets.animation`animT3R`,
     assets.animation`animT4R`
     ]
-    garbageSprites = [assets.image`sprDeadFish`, assets.image`sprTinCan`, assets.image`sprDonut`]
+    garbageSprites = [
+    assets.image`sprDeadFish`,
+    assets.image`sprTinCan`,
+    assets.image`sprGarbageDonut`,
+    assets.image`sprGarbageBanana`,
+    assets.image`sprGarbageApple`
+    ]
 }
 function placeStructure (image2: Image, col: number, row: number) {
     placeObject(image2, col, row)
@@ -437,7 +445,7 @@ function doCutScene (num: number) {
     })
 }
 statusbars.onZero(StatusBarKind.Health, function (status) {
-    game.over(false)
+	
 })
 function saveGame () {
 	
@@ -446,20 +454,27 @@ TilemapPath.on_sprite_finishes_path(function (sprite) {
 	
 })
 function populateTown () {
+    console.log("populateTown")
     for (let index = 0; index < 10; index++) {
         createNPC(randint(0, 3), 99, 99)
     }
     for (let index = 0; index < 20; index++) {
-        createGarbage(randint(0, 2), 99, 99)
+        createGarbage(randint(0, 4), 99, 99)
     }
-    for (let location of tiles.getTilesByType(assets.tile`tHouse0`)) {
+    for (let location of tiles.getTilesByType(assets.tile`tHouse1`)) {
         placeStructure(assets.image`sprRedHouseS`, tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
         makeWalls(tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
         mySprite.setFlag(SpriteFlag.GhostThroughSprites, true)
         mySprite.z = 20
     }
-    for (let location of tiles.getTilesByType(assets.tile`tHouse1`)) {
+    for (let location of tiles.getTilesByType(assets.tile`tHouse2`)) {
         placeStructure(assets.image`sprBrownHouseS`, tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
+        makeWalls(tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
+        mySprite.setFlag(SpriteFlag.GhostThroughSprites, true)
+        mySprite.z = 20
+    }
+    for (let location of tiles.getTilesByType(assets.tile`tHouse3`)) {
+        placeStructure(assets.image`sprPurpleHouseS`, tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
         makeWalls(tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
         mySprite.setFlag(SpriteFlag.GhostThroughSprites, true)
         mySprite.z = 20
