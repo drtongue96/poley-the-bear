@@ -425,7 +425,8 @@ function initializeGame () {
     assets.image`sprTinCan`,
     assets.image`sprGarbageDonut`,
     assets.image`sprGarbageBanana`,
-    assets.image`sprGarbageApple`
+    assets.image`sprGarbageApple`,
+    assets.image`sprGarbageDrink`
     ]
 }
 function placeStructure (image2: Image, col: number, row: number) {
@@ -459,7 +460,7 @@ function populateTown () {
         createNPC(randint(0, 3), 99, 99)
     }
     for (let index = 0; index < 20; index++) {
-        createGarbage(randint(0, 4), 99, 99)
+        createGarbage(randint(0, 5), 99, 99)
     }
     for (let location of tiles.getTilesByType(assets.tile`tHouse1`)) {
         placeStructure(assets.image`sprRedHouseS`, tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
