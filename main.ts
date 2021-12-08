@@ -12,6 +12,8 @@ namespace SpriteKind {
 function setupLevel (lvl: number) {
     music.stopAllSounds()
     if (lvl == 0) {
+        doCutScene(1)
+        hero.setFlag(SpriteFlag.Invisible, false)
         scene.setBackgroundColor(13)
         effects.blizzard.startScreenEffect()
         tiles.loadMap(tiles.createMap(tilemap`tmCutscene1`))
@@ -435,14 +437,15 @@ function placeStructure (image2: Image, col: number, row: number) {
 }
 function doCutScene (num: number) {
     story.startCutscene(function () {
-        controller.moveSprite(hero, 0, 0)
-        hero.setFlag(SpriteFlag.Invisible, true)
+        scene.setBackgroundColor(15)
+        game.showLongText("Global warming is causing the glaciers in the North to melt, affecting the local wildlife.", DialogLayout.Full)
+        hero.setFlag(SpriteFlag.Invisible, false)
         if (num == 1) {
             tiles.loadMap(tiles.createMap(tilemap`tmCutscene1`))
         }
     })
     timer.after(4000, function () {
-        game.splash("Poley The Bear")
+    	
     })
 }
 statusbars.onZero(StatusBarKind.Health, function (status) {
@@ -535,7 +538,7 @@ let currentLevel = 0
 changeColors(false)
 let debugMode = false
 initializeGame()
-currentLevel = 1
+currentLevel = 0
 initializePlayer(currentLevel)
 startGame()
 game.onUpdateInterval(5000, function () {
