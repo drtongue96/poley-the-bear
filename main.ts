@@ -15,7 +15,6 @@ function setupLevel (lvl: number) {
         doCutScene(1)
         hero.setFlag(SpriteFlag.Invisible, false)
         scene.setBackgroundColor(13)
-        effects.blizzard.startScreenEffect()
         tiles.loadMap(tiles.createMap(tilemap`tmCutscene1`))
     }
     if (lvl == 1) {
@@ -436,17 +435,37 @@ function placeStructure (image2: Image, col: number, row: number) {
     tiles.setWallAt(tiles.getTileLocation(col, row), true)
 }
 function doCutScene (num: number) {
-    story.startCutscene(function () {
+    if (num == 1) {
         scene.setBackgroundColor(15)
         game.showLongText("Global warming is causing the glaciers in the North to melt, affecting the local wildlife.", DialogLayout.Full)
+        tiles.loadMap(tiles.createMap(tilemap`tmCutscene1`))
+        mySprite2 = sprites.create(assets.image`sprGlacier`, SpriteKind.Player)
+        tiles.placeOnTile(mySprite2, tiles.getTileLocation(4, 1))
+        tiles.placeOnTile(hero, tiles.getTileLocation(1, 1))
         hero.setFlag(SpriteFlag.Invisible, false)
-        if (num == 1) {
-            tiles.loadMap(tiles.createMap(tilemap`tmCutscene1`))
-        }
-    })
-    timer.after(4000, function () {
-    	
-    })
+        effects.blizzard.startScreenEffect()
+        timer.after(2000, function () {
+            imagemorph.morph(mySprite2, img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `)
+            story.spriteMoveToLocation(hero, 80, 110, 40)
+        })
+    }
 }
 statusbars.onZero(StatusBarKind.Health, function (status) {
 	
@@ -525,6 +544,7 @@ function changeColors (bool: boolean) {
     }
 }
 let path: TilemapPath.TilemapPath = null
+let mySprite2: Sprite = null
 let garbageSprites: Image[] = []
 let hungerbar: StatusBarSprite = null
 let townieRightAnim: Image[][] = []
