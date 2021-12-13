@@ -335,25 +335,6 @@ cc7777777777776c
 .....eeeeee.....
 .......ee.......
 `;
-            case "image1":
-            case "sprPoleyR":return img`
-. . . . . . 1 . . . 1 . . . . . 
-. . . . . 1 3 1 . 1 3 1 . . . . 
-. . . . . 1 1 1 1 1 1 1 . . . . 
-. . . . 1 1 1 1 9 1 9 1 . . . . 
-. . . . 1 1 1 1 5 5 5 e . . . . 
-. . . . 1 1 1 1 5 5 5 5 . . . . 
-. . . . 1 1 1 1 5 5 5 5 . . . . 
-. . . 1 1 1 1 1 1 1 . . . . . . 
-. . 1 1 1 1 1 1 1 1 1 1 1 . . . 
-. . 1 1 1 1 1 1 1 1 3 3 1 . . . 
-. . 1 1 1 1 1 1 1 1 . . 3 . . . 
-. . 1 1 1 1 1 1 1 1 . . . . . . 
-. . 1 1 1 1 1 1 1 1 . . . . . . 
-. . . 1 1 1 1 1 1 1 . . . . . . 
-. . . 1 3 . . . 1 3 . . . . . . 
-. . . 1 1 1 . . 1 1 1 . . . . . 
-`;
             case "image12":
             case "sprPoleyFront":return img`
 . . . . . 1 . . . 1 . . . . . . 
@@ -724,6 +705,44 @@ ddddddddddddd3dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
 dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
 dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
 dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+`;
+            case "image28":
+            case "sprPoleySwim":return img`
+. . . . . . 1 . . . 1 . . . . . 
+. . . . . 1 3 1 . 1 3 1 . . . . 
+. . . . . 1 1 1 1 1 1 1 . . . . 
+. . . . 1 1 1 1 9 1 9 1 . . . . 
+. . . . 1 1 1 1 5 5 5 e . . . . 
+. . . . 1 1 1 1 5 5 5 5 . . . . 
+. . . . 1 1 1 1 5 5 5 5 . . . . 
+. . . . . . 1 1 1 1 . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`;
+            case "image1":
+            case "sprPoleyR":return img`
+. . . . . . 1 . . . 1 . . . . . 
+. . . . . 1 3 1 . 1 3 1 . . . . 
+. . . . . 1 1 1 1 1 1 1 . . . . 
+. . . . 1 1 1 1 9 1 9 1 . . . . 
+. . . . 1 1 1 1 5 5 5 e . . . . 
+. . . . 1 1 1 1 5 5 5 5 . . . . 
+. . . . 1 1 1 1 5 5 5 5 . . . . 
+. . . 1 1 1 1 1 1 1 . . . . . . 
+. . 1 1 1 1 1 1 1 1 1 1 1 . . . 
+. . 1 1 1 1 1 1 1 1 3 3 1 . . . 
+. . 1 1 1 1 1 1 1 1 . . 3 . . . 
+. . 1 1 1 1 1 1 1 1 . . . . . . 
+. . 1 1 1 1 1 1 1 1 . . . . . . 
+. . . 1 1 1 1 1 1 1 . . . . . . 
+. . . 1 3 . . . 1 3 . . . . . . 
+. . . 1 1 1 . . 1 1 1 . . . . . 
 `;
         }
         return null;
@@ -2257,6 +2276,25 @@ f b d d b b d d 2 b f f d f
 . . . . . . 1 1 1 1 1 1 1 . . . 
 . . . . . . . 3 1 . 3 1 . . . . 
 . . . . . . 1 1 1 1 1 1 . . . . 
+`];
+            case "animPoleySwim":
+            case "anim31":return [img`
+. . . . . . 1 . . . 1 . . . . . 
+. . . . . 1 3 1 . 1 3 1 . . . . 
+. . . . . 1 1 1 1 1 1 1 . . . . 
+. . . . 1 1 1 1 9 1 9 1 . . . . 
+. . . . 1 1 1 1 5 5 5 e . . . . 
+. . . . 1 1 1 1 5 5 5 5 . . . . 
+. . . . 1 1 1 1 5 5 5 5 . . . . 
+. . . . . . 1 1 1 1 . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
 `];
         }
         return null;

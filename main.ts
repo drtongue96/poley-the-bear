@@ -463,7 +463,15 @@ function doCutScene (num: number) {
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 `)
+            hero.setImage(assets.image`sprPoleySwim`)
+            animation.runImageAnimation(
+            hero,
+            assets.animation`animPoleySwim`,
+            200,
+            true
+            )
             story.spriteMoveToLocation(hero, 80, 110, 40)
+            hero.setImage(assets.image`sprPoleyR`)
         })
     }
 }
