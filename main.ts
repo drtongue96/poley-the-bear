@@ -15,7 +15,6 @@ function setupLevel (lvl: number) {
         doCutScene(1)
         hero.setFlag(SpriteFlag.Invisible, false)
         scene.setBackgroundColor(13)
-        tiles.loadMap(tiles.createMap(tilemap`tmCutscene1`))
     }
     if (lvl == 1) {
         scene.setBackgroundColor(7)
@@ -286,6 +285,7 @@ function initializePlayer (lvl: number) {
     if (lvl == 1) {
         hero = sprites.create(assets.image`myImage`, SpriteKind.Player)
         hungerbar = statusbars.create(20, 4, StatusBarKind.Health)
+        animateHero("abc")
         hungerbar.setColor(6, 2)
         hungerbar.attachToSprite(hero)
         hungerbar.value = 50
@@ -305,6 +305,26 @@ function initializePlayer (lvl: number) {
     scene.cameraFollowSprite(hero)
 }
 function animateHero (character: string) {
+    if (character == "poleyswim") {
+        characterAnimations.loopFrames(
+        hero,
+        assets.animation`animPoleySwim`,
+        200,
+        characterAnimations.rule(Predicate.NotMoving)
+        )
+        characterAnimations.loopFrames(
+        hero,
+        assets.animation`animPoleySwim`,
+        200,
+        characterAnimations.rule(Predicate.MovingRight)
+        )
+        characterAnimations.loopFrames(
+        hero,
+        assets.animation`animPoleySwim`,
+        200,
+        characterAnimations.rule(Predicate.MovingDown)
+        )
+    }
     if (character == "poley") {
         characterAnimations.loopFrames(
         hero,
@@ -445,6 +465,7 @@ function doCutScene (num: number) {
         hero.setFlag(SpriteFlag.Invisible, false)
         effects.blizzard.startScreenEffect()
         timer.after(2000, function () {
+            music.spooky.play()
             imagemorph.morph(mySprite2, img`
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
@@ -464,14 +485,10 @@ function doCutScene (num: number) {
                 . . . . . . . . . . . . . . . . 
                 `)
             hero.setImage(assets.image`sprPoleySwim`)
-            animation.runImageAnimation(
-            hero,
-            assets.animation`animPoleySwim`,
-            200,
-            true
-            )
+            animateHero("poleyswim")
             story.spriteMoveToLocation(hero, 80, 110, 40)
             hero.setImage(assets.image`sprPoleyR`)
+            animateHero("poley")
         })
     }
 }
