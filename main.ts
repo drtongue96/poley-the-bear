@@ -24,9 +24,33 @@ function setupLevel (lvl: number) {
             while (currentLevel == 1) {
                 for (let location of sprites.allOfKind(SpriteKind.NPC)) {
                     if (sprites.readDataString(location, "state") == "idle") {
-                        if (Math.percentChance(50)) {
+                        if (Math.percentChance(20)) {
                             sprites.setDataString(location, "state", "walking")
-                            scene.followPath(location, scene.aStar(tiles.locationOfSprite(location), tiles.getTilesByType(assets.tile`tGreen`)._pickRandom()), 30)
+                            scene.followPath(location, scene.aStar(tiles.locationOfSprite(location), tiles.getTilesByType(sprites.castle.tilePath8)._pickRandom()), 15)
+                        }
+                    } else {
+                        if (characterAnimations.matchesRule(location, characterAnimations.rule(Predicate.NotMoving))) {
+                            sprites.setDataString(location, "state", "idle")
+                        }
+                    }
+                    pause(20)
+                }
+            }
+        })
+    }
+    if (lvl == 2) {
+        doCutScene(3)
+        scene.setBackgroundColor(7)
+        tiles.loadMap(tiles.createMap(tilemap`level4`))
+        tiles.placeOnTile(hero, tiles.getTileLocation(4, 1))
+        populateTown()
+        timer.background(function () {
+            while (currentLevel == 1) {
+                for (let location of sprites.allOfKind(SpriteKind.NPC)) {
+                    if (sprites.readDataString(location, "state") == "idle") {
+                        if (Math.percentChance(20)) {
+                            sprites.setDataString(location, "state", "walking")
+                            scene.followPath(location, scene.aStar(tiles.locationOfSprite(location), tiles.getTilesByType(sprites.castle.tilePath8)._pickRandom()), 15)
                         }
                     } else {
                         if (characterAnimations.matchesRule(location, characterAnimations.rule(Predicate.NotMoving))) {
@@ -183,6 +207,9 @@ function playMusic (song: string) {
         })
     }
 }
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    playMusic("something")
+})
 function createNPC (index: number, col: number, row: number) {
     console.log("createNPC")
     myNPC = sprites.create(townieDownAnim[index][0], SpriteKind.NPC)
@@ -237,7 +264,7 @@ function createNPC (index: number, col: number, row: number) {
     characterAnimations.setCharacterAnimationsEnabled(myNPC, true)
     sprites.setDataString(myNPC, "state", "idle")
     if (col == 99) {
-        tiles.placeOnRandomTile(myNPC, sprites.castle.tilePath4)
+        tiles.placeOnRandomTile(myNPC, assets.tile`tGreen`)
     } else {
         tiles.placeOnTile(myNPC, tiles.getTileLocation(col, row))
     }
@@ -362,6 +389,9 @@ function animateHero (character: string) {
         )
     }
 }
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    playMusic("poleydies")
+})
 function createGarbage (index: number, col: number, row: number) {
     console.log("createGarbage")
     mySprite = sprites.create(garbageSprites[index], SpriteKind.Food)
@@ -369,7 +399,7 @@ function createGarbage (index: number, col: number, row: number) {
     if (col == 99) {
         tiles.placeOnRandomTile(mySprite, sprites.castle.tilePath6)
     } else {
-        tiles.placeOnTile(mySprite, tiles.getTileLocation(col, row))
+        mySprite.setPosition(col, row)
     }
 }
 function startGame () {
@@ -413,7 +443,8 @@ function initializeGame () {
     assets.image`sprGarbageDonut`,
     assets.image`sprGarbageBanana`,
     assets.image`sprGarbageApple`,
-    assets.image`sprGarbageDrink`
+    assets.image`sprGarbageDrink`,
+    assets.image`sprWaterBottle`
     ]
 }
 function placeStructure (image2: Image, col: number, row: number) {
@@ -459,7 +490,13 @@ function doCutScene (num: number) {
     }
     if (num == 2) {
         scene.setBackgroundColor(15)
+        playMusic("newlevel")
         game.showLongText("Poley is hungry.  Find the garbage the townies are dropping, and make it to the checkpoint.  Don't get caught!", DialogLayout.Full)
+    }
+    if (num == 3) {
+        scene.setBackgroundColor(15)
+        playMusic("newlevel")
+        game.showLongText("Tristini has noticed Poley and wants to do something about it.  Find the recycling bottles and return them to the Windmill in time.", DialogLayout.Full)
     }
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`tGlacier2`, function (sprite, location) {
@@ -478,7 +515,7 @@ TilemapPath.on_sprite_finishes_path(function (sprite) {
 	
 })
 function populateTown () {
-    for (let index = 0; index < 6; index++) {
+    for (let index = 0; index < 4; index++) {
         createNPC(randint(0, 3), 99, 99)
     }
     for (let index = 0; index < 0; index++) {
@@ -512,9 +549,8 @@ function populateTown () {
         mySprite.y += -4
         mySprite.z = 20
     }
-    for (let location of tiles.getTilesByType(assets.tile`tBlueBin`)) {
-        placeStructure(assets.image`sprBlueBin`, tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
-        mySprite.y += -4
+    for (let location of tiles.getTilesByType(assets.tile`myTile0`)) {
+        placeStructure(assets.image`sprWindmill`, tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row))
         mySprite.z = 20
     }
 }
@@ -543,6 +579,8 @@ function changeColors (bool: boolean) {
         color.setColor(7, color.rgb(0, 255, 152))
     }
 }
+let garbageY = 0
+let garbageX = 0
 let path: TilemapPath.TilemapPath = null
 let mySprite2: Sprite = null
 let garbageSprites: Image[] = []
@@ -577,12 +615,13 @@ game.onUpdateInterval(500, function () {
             if (sight.isInSight(
             location,
             hero,
-            50,
+            200,
             false
             )) {
                 location.sayText("bear!")
                 timer.after(500, function () {
-                    hero.sayText("doh")
+                    playMusic("something")
+                    tiles.placeOnTile(hero, tiles.getTileLocation(4, 1))
                 })
             } else {
                 location.sayText("")
@@ -608,6 +647,24 @@ game.onUpdateInterval(500, function () {
                 location.sayText("")
                 hero.sayText("")
             }
+        }
+    }
+})
+game.onUpdateInterval(10000, function () {
+    if (currentLevel == 1) {
+        for (let location of sprites.allOfKind(SpriteKind.NPC)) {
+            console.log(location)
+            garbageX = location.x
+            garbageY = location.y
+            createGarbage(randint(0, 5), garbageX, garbageY)
+        }
+    }
+    if (currentLevel == 2) {
+        for (let location of sprites.allOfKind(SpriteKind.NPC)) {
+            console.log(location)
+            garbageX = location.x
+            garbageY = location.y
+            createGarbage(6, garbageX, garbageY)
         }
     }
 })
