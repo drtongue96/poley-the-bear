@@ -13,12 +13,10 @@ function setupLevel (lvl: number) {
     music.stopAllSounds()
     if (lvl == 0) {
         doCutScene(1)
-        hero.setFlag(SpriteFlag.Invisible, false)
-        scene.setBackgroundColor(13)
     }
     if (lvl == 1) {
+        doCutScene(2)
         scene.setBackgroundColor(7)
-        effects.blizzard.startScreenEffect()
         tiles.loadMap(tiles.createMap(tilemap`level4`))
         tiles.placeOnTile(hero, tiles.getTileLocation(4, 1))
         populateTown()
@@ -38,38 +36,6 @@ function setupLevel (lvl: number) {
                     pause(20)
                 }
             }
-        })
-    }
-    if (lvl == 2) {
-        scene.setBackgroundColor(7)
-        tiles.loadMap(tiles.createMap(tilemap`tmTown`))
-        tiles.placeOnTile(hero, tiles.getTileLocation(13, 0))
-        populateTown()
-        timer.background(function () {
-            while (currentLevel == 2) {
-                for (let location of sprites.allOfKind(SpriteKind.NPC)) {
-                    if (sprites.readDataString(location, "state") == "idle") {
-                        if (Math.percentChance(50)) {
-                            sprites.setDataString(location, "state", "walking")
-                            scene.followPath(location, scene.aStar(tiles.locationOfSprite(location), tiles.getTilesByType(assets.tile`tGreen`)._pickRandom()), 30)
-                        }
-                    } else {
-                        if (characterAnimations.matchesRule(location, characterAnimations.rule(Predicate.NotMoving))) {
-                            sprites.setDataString(location, "state", "idle")
-                        }
-                    }
-                    pause(20)
-                }
-            }
-        })
-    }
-    if (lvl == 3) {
-        scene.setBackgroundColor(7)
-        tiles.loadMap(tiles.createMap(tilemap`level4`))
-        populateMaze()
-        tiles.placeOnTile(hero, tiles.getTileLocation(4, 0))
-        timer.background(function () {
-        	
         })
     }
 }
@@ -486,12 +452,22 @@ function doCutScene (num: number) {
                 `)
             hero.setImage(assets.image`sprPoleySwim`)
             animateHero("poleyswim")
-            story.spriteMoveToLocation(hero, 80, 110, 40)
+            story.spriteMoveToLocation(hero, 80, 100, 40)
             hero.setImage(assets.image`sprPoleyR`)
             animateHero("poley")
         })
     }
+    if (num == 2) {
+        scene.setBackgroundColor(15)
+        game.showLongText("Poley is hungry.  Find the garbage the townies are dropping, and make it to the checkpoint.  Don't get caught!", DialogLayout.Full)
+    }
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`tGlacier2`, function (sprite, location) {
+    cleanUp()
+    currentLevel += 1
+    initializePlayer(currentLevel)
+    setupLevel(currentLevel)
+})
 statusbars.onZero(StatusBarKind.Health, function (status) {
 	
 })
@@ -502,11 +478,10 @@ TilemapPath.on_sprite_finishes_path(function (sprite) {
 	
 })
 function populateTown () {
-    console.log("populateTown")
-    for (let index = 0; index < 10; index++) {
+    for (let index = 0; index < 6; index++) {
         createNPC(randint(0, 3), 99, 99)
     }
-    for (let index = 0; index < 20; index++) {
+    for (let index = 0; index < 0; index++) {
         createGarbage(randint(0, 5), 99, 99)
     }
     for (let location of tiles.getTilesByType(assets.tile`tHouse1`)) {
@@ -615,7 +590,7 @@ game.onUpdateInterval(500, function () {
             }
         }
     }
-    if (currentLevel == 3) {
+    if (currentLevel == 2) {
         console.logValue("in loop", currentLevel)
         for (let location of sprites.allOfKind(SpriteKind.NPC)) {
             if (sight.isInSight(
